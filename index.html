@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operator HQ AI - Internal Command Center</title>
+    <title>Operator HQ AI - Adspend Agency</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --brand-color: #c1ff72;
+            --brand-dark: #a0e65c;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -15,7 +20,7 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #0f172a;
+            background-color: #000000;
             color: #e2e8f0;
         }
         
@@ -33,7 +38,7 @@
         .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            border-color: #4f46e5;
+            border-color: var(--brand-color);
         }
         
         .metric-card {
@@ -50,7 +55,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            background: var(--brand-color);
         }
         
         .ai-tool-card {
@@ -69,13 +74,13 @@
             left: 0;
             width: 100%;
             height: 3px;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            background: var(--brand-color);
         }
         
         .ai-tool-card:hover {
             transform: translateY(-5px);
-            border-color: #4f46e5;
-            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3);
+            border-color: var(--brand-color);
+            box-shadow: 0 10px 25px -5px rgba(193, 255, 114, 0.3);
         }
         
         .ai-tool-icon {
@@ -96,7 +101,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
             align-items: center;
             justify-content: center;
@@ -141,8 +146,8 @@
         
         .form-input:focus {
             outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 3px rgba(193, 255, 114, 0.2);
         }
         
         .form-textarea {
@@ -159,13 +164,13 @@
         
         .form-textarea:focus {
             outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 3px rgba(193, 255, 114, 0.2);
         }
         
         .btn-primary {
-            background: linear-gradient(45deg, #4f46e5, #7c3aed);
-            color: white;
+            background: var(--brand-color);
+            color: #000000;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
             font-weight: 600;
@@ -175,8 +180,9 @@
         }
         
         .btn-primary:hover {
+            background: var(--brand-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.4);
+            box-shadow: 0 6px 12px rgba(193, 255, 114, 0.4);
         }
         
         .btn-secondary {
@@ -195,8 +201,8 @@
         }
         
         .btn-login {
-            background: linear-gradient(45deg, #4f46e5, #7c3aed);
-            color: white;
+            background: var(--brand-color);
+            color: #000000;
             padding: 0.5rem 1rem;
             border-radius: 6px;
             font-weight: 600;
@@ -209,8 +215,9 @@
         }
         
         .btn-login:hover {
+            background: var(--brand-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.4);
+            box-shadow: 0 6px 12px rgba(193, 255, 114, 0.4);
         }
         
         .output-container {
@@ -260,30 +267,37 @@
         
         .tab.active {
             background: #1e293b;
-            border-bottom: 3px solid #4f46e5;
-            color: #a5b4fc;
+            border-bottom: 3px solid var(--brand-color);
+            color: var(--brand-color);
         }
         
         .tab:hover:not(.active) {
             background: #334155;
         }
         
-        .login-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
-            z-index: 999;
-            display: none;
-            align-items: center;
-            justify-content: center;
+        .brand-text {
+            color: var(--brand-color);
         }
         
-        .login-overlay.active {
-            display: flex;
+        .brand-bg {
+            background-color: var(--brand-color);
+            color: #000000;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--brand-color);
+            color: #000000;
+            border: none;
+            box-shadow: 0 4px 12px rgba(193, 255, 114, 0.4);
+            z-index: 99;
+            font-size: 1.5rem;
         }
         
         @media (max-width: 768px) {
@@ -304,6 +318,20 @@
                 width: 95%;
                 margin: 1rem;
             }
+            
+            .mobile-menu-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-tools-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -313,14 +341,17 @@
         <div class="sidebar w-64 flex-shrink-0 hidden md:block">
             <div class="p-6">
                 <div class="flex items-center space-x-3 mb-10">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center">
-                        <i class="fas fa-rocket text-white"></i>
+                    <div class="w-10 h-10 rounded-lg brand-bg flex items-center justify-center">
+                        <i class="fas fa-rocket"></i>
                     </div>
-                    <h1 class="text-xl font-bold">Operator HQ</h1>
+                    <div>
+                        <h1 class="text-xl font-bold">Operator HQ</h1>
+                        <p class="text-xs brand-text">Adspend Agency</p>
+                    </div>
                 </div>
                 
                 <nav class="space-y-1">
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg bg-indigo-900 bg-opacity-30 text-indigo-300">
+                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg bg-opacity-30 text-brand-color">
                         <i class="fas fa-home w-5"></i>
                         <span>Dashboard</span>
                     </a>
@@ -340,7 +371,7 @@
                         <i class="fas fa-user-friends w-5"></i>
                         <span>Team</span>
                     </a>
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg bg-indigo-900 bg-opacity-30 text-indigo-300">
+                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg bg-opacity-30 text-brand-color">
                         <i class="fas fa-magic w-5"></i>
                         <span>AI Tools</span>
                     </a>
@@ -356,14 +387,19 @@
                 
                 <div class="mt-10 p-4 rounded-lg bg-slate-800 border border-slate-700">
                     <div class="flex items-center space-x-3 mb-3">
-                        <div class="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center">
-                            <i class="fas fa-plus text-white text-xs"></i>
+                        <div class="w-8 h-8 rounded-full brand-bg flex items-center justify-center">
+                            <i class="fas fa-plus text-black text-xs"></i>
                         </div>
                         <span class="font-medium">Create New</span>
                     </div>
-                    <button class="w-full py-2 px-4 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-sm font-medium transition">
+                    <button class="w-full py-2 px-4 brand-bg rounded-lg text-sm font-medium transition">
                         New Project
                     </button>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <p class="text-xs text-slate-500">© 2023 Adspend Agency</p>
+                    <p class="text-xs brand-text font-medium mt-1">We Run Ads</p>
                 </div>
             </div>
         </div>
@@ -373,11 +409,11 @@
             <!-- Top Header -->
             <header class="bg-slate-800 border-b border-slate-700 py-4 px-6 flex items-center justify-between">
                 <div class="flex items-center space-x-4">
-                    <button class="md:hidden text-slate-300">
+                    <button id="menuToggle" class="md:hidden text-slate-300">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                     <div class="relative">
-                        <input type="text" placeholder="Search clients, campaigns, projects..." class="w-64 py-2 px-4 pl-10 rounded-lg bg-slate-700 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent">
+                        <input type="text" placeholder="Search clients, campaigns, projects..." class="w-64 py-2 px-4 pl-10 rounded-lg bg-slate-700 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-color focus:border-transparent">
                         <i class="fas fa-search absolute left-3 top-3 text-slate-400"></i>
                     </div>
                 </div>
@@ -397,18 +433,29 @@
             </header>
             
             <!-- Dashboard Content -->
-            <main class="flex-1 overflow-y-auto p-6 bg-slate-900">
+            <main class="flex-1 overflow-y-auto p-6 bg-black">
                 <div class="mb-6">
-                    <h1 class="text-2xl font-bold mb-2">Client Service AI Tools</h1>
-                    <p class="text-slate-400">Internal tools to help you deliver exceptional results for your clients.</p>
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                        <div>
+                            <h1 class="text-2xl font-bold mb-2">Client Service AI Tools</h1>
+                            <p class="text-slate-400">Internal tools to help you deliver exceptional results for your clients.</p>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-sm brand-text">Adspend Agency</span>
+                                <span class="text-xs text-slate-500">•</span>
+                                <span class="text-xs text-slate-500">We Run Ads</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- AI Tools Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 ai-tools-grid">
                     <!-- Ad Copy Generator -->
                     <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('adCopyModal')">
-                        <div class="ai-tool-icon bg-gradient-to-r from-blue-500 to-indigo-600">
-                            <i class="fas fa-pen-fancy text-white"></i>
+                        <div class="ai-tool-icon brand-bg">
+                            <i class="fas fa-pen-fancy"></i>
                         </div>
                         <h3 class="text-lg font-bold mb-2">Ad Copy Generator</h3>
                         <p class="text-slate-400 text-sm mb-4">Create compelling ad copy for any platform with AI assistance.</p>
@@ -420,8 +467,8 @@
                     
                     <!-- Headline Analyzer -->
                     <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('headlineModal')">
-                        <div class="ai-tool-icon bg-gradient-to-r from-purple-500 to-pink-600">
-                            <i class="fas fa-heading text-white"></i>
+                        <div class="ai-tool-icon brand-bg">
+                            <i class="fas fa-heading"></i>
                         </div>
                         <h3 class="text-lg font-bold mb-2">Headline Analyzer</h3>
                         <p class="text-slate-400 text-sm mb-4">Analyze and optimize headlines for maximum impact.</p>
@@ -433,8 +480,8 @@
                     
                     <!-- Ad Spy Tool -->
                     <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('adSpyModal')">
-                        <div class="ai-tool-icon bg-gradient-to-r from-green-500 to-emerald-600">
-                            <i class="fas fa-eye text-white"></i>
+                        <div class="ai-tool-icon brand-bg">
+                            <i class="fas fa-eye"></i>
                         </div>
                         <h3 class="text-lg font-bold mb-2">Ad Spy Tool</h3>
                         <p class="text-slate-400 text-sm mb-4">Discover competitors' top-performing ads and strategies.</p>
@@ -446,8 +493,8 @@
                     
                     <!-- CRO Audit Tool -->
                     <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('croModal')">
-                        <div class="ai-tool-icon bg-gradient-to-r from-yellow-500 to-amber-600">
-                            <i class="fas fa-chart-line text-white"></i>
+                        <div class="ai-tool-icon brand-bg">
+                            <i class="fas fa-chart-line"></i>
                         </div>
                         <h3 class="text-lg font-bold mb-2">CRO Audit Tool</h3>
                         <p class="text-slate-400 text-sm mb-4">GPT-powered conversion rate optimization audits.</p>
@@ -459,8 +506,8 @@
                     
                     <!-- UGC Script Writer -->
                     <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('ugcModal')">
-                        <div class="ai-tool-icon bg-gradient-to-r from-red-500 to-orange-600">
-                            <i class="fas fa-video text-white"></i>
+                        <div class="ai-tool-icon brand-bg">
+                            <i class="fas fa-video"></i>
                         </div>
                         <h3 class="text-lg font-bold mb-2">UGC Script Writer</h3>
                         <p class="text-slate-400 text-sm mb-4">Generate authentic user-generated content scripts.</p>
@@ -472,8 +519,8 @@
                     
                     <!-- Lead Scoring AI -->
                     <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('leadScoringModal')">
-                        <div class="ai-tool-icon bg-gradient-to-r from-teal-500 to-cyan-600">
-                            <i class="fas fa-user-check text-white"></i>
+                        <div class="ai-tool-icon brand-bg">
+                            <i class="fas fa-user-check"></i>
                         </div>
                         <h3 class="text-lg font-bold mb-2">Lead Scoring AI</h3>
                         <p class="text-slate-400 text-sm mb-4">AI-powered lead qualification and scoring system.</p>
@@ -488,13 +535,13 @@
                 <div class="card rounded-xl p-6 mb-8">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-xl font-bold">Recent AI Activities</h2>
-                        <button class="text-sm text-indigo-400 hover:text-indigo-300">View All</button>
+                        <button class="text-sm brand-text hover:text-brand-dark">View All</button>
                     </div>
                     
                     <div class="space-y-4">
                         <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
-                            <div class="w-10 h-10 rounded-full bg-indigo-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-pen-fancy text-indigo-400"></i>
+                            <div class="w-10 h-10 rounded-full bg-opacity-30 flex items-center justify-center flex-shrink-0" style="background-color: rgba(193, 255, 114, 0.2);">
+                                <i class="fas fa-pen-fancy brand-text"></i>
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between">
@@ -503,15 +550,15 @@
                                 </div>
                                 <p class="text-sm text-slate-400 mt-1">Generated 5 ad variations for TechCorp's Facebook campaign</p>
                                 <div class="flex items-center mt-2">
-                                    <span class="text-xs px-2 py-1 rounded bg-indigo-900 bg-opacity-30 text-indigo-400">Ad Copy Generator</span>
+                                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 brand-text" style="background-color: rgba(193, 255, 114, 0.1);">Ad Copy Generator</span>
                                     <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">TechCorp</span>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
-                            <div class="w-10 h-10 rounded-full bg-yellow-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-chart-line text-yellow-400"></i>
+                            <div class="w-10 h-10 rounded-full bg-opacity-30 flex items-center justify-center flex-shrink-0" style="background-color: rgba(193, 255, 114, 0.2);">
+                                <i class="fas fa-chart-line brand-text"></i>
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between">
@@ -520,15 +567,15 @@
                                 </div>
                                 <p class="text-sm text-slate-400 mt-1">Completed conversion audit for HealthPlus landing page</p>
                                 <div class="flex items-center mt-2">
-                                    <span class="text-xs px-2 py-1 rounded bg-yellow-900 bg-opacity-30 text-yellow-400">CRO Audit</span>
+                                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 brand-text" style="background-color: rgba(193, 255, 114, 0.1);">CRO Audit</span>
                                     <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">HealthPlus</span>
                                 </div>
                             </div>
                         </div>
                         
                         <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
-                            <div class="w-10 h-10 rounded-full bg-red-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-video text-red-400"></i>
+                            <div class="w-10 h-10 rounded-full bg-opacity-30 flex items-center justify-center flex-shrink-0" style="background-color: rgba(193, 255, 114, 0.2);">
+                                <i class="fas fa-video brand-text"></i>
                             </div>
                             <div class="flex-1">
                                 <div class="flex justify-between">
@@ -537,7 +584,7 @@
                                 </div>
                                 <p class="text-sm text-slate-400 mt-1">Created 3 TikTok scripts for FinanceFlow's new product launch</p>
                                 <div class="flex items-center mt-2">
-                                    <span class="text-xs px-2 py-1 rounded bg-red-900 bg-opacity-30 text-red-400">UGC Script Writer</span>
+                                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 brand-text" style="background-color: rgba(193, 255, 114, 0.1);">UGC Script Writer</span>
                                     <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">FinanceFlow</span>
                                 </div>
                             </div>
@@ -549,15 +596,15 @@
                 <div class="card rounded-xl p-6">
                     <h2 class="text-xl font-bold mb-6">AI Tool Performance</h2>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 dashboard-grid">
                         <div class="metric-card p-5 rounded-xl">
                             <div class="flex justify-between items-start mb-4">
                                 <div>
                                     <p class="text-slate-400 text-sm">Ad Copy Generated</p>
                                     <h3 class="text-2xl font-bold mt-1">142</h3>
                                 </div>
-                                <div class="w-10 h-10 rounded-lg bg-indigo-900 bg-opacity-30 flex items-center justify-center">
-                                    <i class="fas fa-pen-fancy text-indigo-400"></i>
+                                <div class="w-10 h-10 rounded-lg bg-opacity-30 flex items-center justify-center" style="background-color: rgba(193, 255, 114, 0.2);">
+                                    <i class="fas fa-pen-fancy brand-text"></i>
                                 </div>
                             </div>
                             <div class="flex items-center">
@@ -574,8 +621,8 @@
                                     <p class="text-slate-400 text-sm">CRO Audits</p>
                                     <h3 class="text-2xl font-bold mt-1">28</h3>
                                 </div>
-                                <div class="w-10 h-10 rounded-lg bg-yellow-900 bg-opacity-30 flex items-center justify-center">
-                                    <i class="fas fa-chart-line text-yellow-400"></i>
+                                <div class="w-10 h-10 rounded-lg bg-opacity-30 flex items-center justify-center" style="background-color: rgba(193, 255, 114, 0.2);">
+                                    <i class="fas fa-chart-line brand-text"></i>
                                 </div>
                             </div>
                             <div class="flex items-center">
@@ -592,8 +639,8 @@
                                     <p class="text-slate-400 text-sm">UGC Scripts</p>
                                     <h3 class="text-2xl font-bold mt-1">67</h3>
                                 </div>
-                                <div class="w-10 h-10 rounded-lg bg-red-900 bg-opacity-30 flex items-center justify-center">
-                                    <i class="fas fa-video text-red-400"></i>
+                                <div class="w-10 h-10 rounded-lg bg-opacity-30 flex items-center justify-center" style="background-color: rgba(193, 255, 114, 0.2);">
+                                    <i class="fas fa-video brand-text"></i>
                                 </div>
                             </div>
                             <div class="flex items-center">
@@ -610,8 +657,8 @@
                                     <p class="text-slate-400 text-sm">Avg. Satisfaction</p>
                                     <h3 class="text-2xl font-bold mt-1">94%</h3>
                                 </div>
-                                <div class="w-10 h-10 rounded-lg bg-green-900 bg-opacity-30 flex items-center justify-center">
-                                    <i class="fas fa-smile text-green-400"></i>
+                                <div class="w-10 h-10 rounded-lg bg-opacity-30 flex items-center justify-center" style="background-color: rgba(193, 255, 114, 0.2);">
+                                    <i class="fas fa-smile brand-text"></i>
                                 </div>
                             </div>
                             <div class="flex items-center">
@@ -623,15 +670,29 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- Footer -->
+                <div class="mt-8 text-center pb-6">
+                    <p class="text-sm brand-text font-medium">Adspend Agency</p>
+                    <p class="text-xs text-slate-500 mt-1">We Run Ads</p>
+                </div>
             </main>
         </div>
     </div>
+    
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+    </button>
     
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
         <div class="modal-content" style="max-width: 400px;">
             <div class="modal-header">
-                <h2 class="text-xl font-bold">Login to Operator HQ</h2>
+                <div>
+                    <h2 class="text-xl font-bold">Login to Operator HQ</h2>
+                    <p class="text-sm brand-text">Adspend Agency</p>
+                </div>
                 <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -653,14 +714,19 @@
                             <input type="checkbox" class="mr-2">
                             <span class="text-sm">Remember me</span>
                         </label>
-                        <a href="#" class="text-sm text-indigo-400 hover:text-indigo-300">Forgot password?</a>
+                        <a href="#" class="text-sm brand-text hover:text-brand-dark">Forgot password?</a>
                     </div>
                     
                     <button type="submit" class="btn-primary w-full">Login</button>
                 </form>
                 
                 <div class="mt-6 text-center">
-                    <p class="text-sm text-slate-400">Don't have an account? <a href="#" class="text-indigo-400 hover:text-indigo-300">Contact your admin</a></p>
+                    <p class="text-sm text-slate-400">Don't have an account? <a href="#" class="brand-text hover:text-brand-dark">Contact your admin</a></p>
+                </div>
+                
+                <div class="mt-6 pt-4 border-t border-slate-700 text-center">
+                    <p class="text-xs brand-text font-medium">Adspend Agency</p>
+                    <p class="text-xs text-slate-500 mt-1">We Run Ads</p>
                 </div>
             </div>
         </div>
@@ -670,7 +736,10 @@
     <div id="adCopyModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="text-xl font-bold">Ad Copy Generator</h2>
+                <div>
+                    <h2 class="text-xl font-bold">Ad Copy Generator</h2>
+                    <p class="text-sm brand-text">Adspend Agency</p>
+                </div>
                 <button onclick="closeModal('adCopyModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -741,7 +810,10 @@
     <div id="headlineModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="text-xl font-bold">Headline Analyzer</h2>
+                <div>
+                    <h2 class="text-xl font-bold">Headline Analyzer</h2>
+                    <p class="text-sm brand-text">Adspend Agency</p>
+                </div>
                 <button onclick="closeModal('headlineModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -793,7 +865,10 @@
     <div id="croModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="text-xl font-bold">CRO Audit Tool</h2>
+                <div>
+                    <h2 class="text-xl font-bold">CRO Audit Tool</h2>
+                    <p class="text-sm brand-text">Adspend Agency</p>
+                </div>
                 <button onclick="closeModal('croModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -849,7 +924,10 @@
     <div id="ugcModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="text-xl font-bold">UGC Script Writer</h2>
+                <div>
+                    <h2 class="text-xl font-bold">UGC Script Writer</h2>
+                    <p class="text-sm brand-text">Adspend Agency</p>
+                </div>
                 <button onclick="closeModal('ugcModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -916,15 +994,18 @@
     <div id="adSpyModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="text-xl font-bold">Ad Spy Tool</h2>
+                <div>
+                    <h2 class="text-xl font-bold">Ad Spy Tool</h2>
+                    <p class="text-sm brand-text">Adspend Agency</p>
+                </div>
                 <button onclick="closeModal('adSpyModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="text-center py-10">
-                    <div class="w-16 h-16 rounded-full bg-yellow-900 bg-opacity-30 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-tools text-yellow-400 text-2xl"></i>
+                    <div class="w-16 h-16 rounded-full bg-opacity-30 flex items-center justify-center mx-auto mb-4" style="background-color: rgba(193, 255, 114, 0.2);">
+                        <i class="fas fa-tools brand-text text-2xl"></i>
                     </div>
                     <h3 class="text-lg font-medium mb-2">Tool in Development</h3>
                     <p class="text-slate-400 mb-6">The Ad Spy Tool is currently under development and will be available soon.</p>
@@ -938,15 +1019,18 @@
     <div id="leadScoringModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="text-xl font-bold">Lead Scoring AI</h2>
+                <div>
+                    <h2 class="text-xl font-bold">Lead Scoring AI</h2>
+                    <p class="text-sm brand-text">Adspend Agency</p>
+                </div>
                 <button onclick="closeModal('leadScoringModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="text-center py-10">
-                    <div class="w-16 h-16 rounded-full bg-teal-900 bg-opacity-30 flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-tools text-teal-400 text-2xl"></i>
+                    <div class="w-16 h-16 rounded-full bg-opacity-30 flex items-center justify-center mx-auto mb-4" style="background-color: rgba(193, 255, 114, 0.2);">
+                        <i class="fas fa-tools brand-text text-2xl"></i>
                     </div>
                     <h3 class="text-lg font-medium mb-2">Tool in Development</h3>
                     <p class="text-slate-400 mb-6">The Lead Scoring AI is currently under development and will be available soon.</p>
@@ -993,8 +1077,8 @@
                 
                 // Update UI to show logged in state
                 document.getElementById('loginBtn').innerHTML = `
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center">
-                        <span class="text-white text-sm font-medium">${email.charAt(0).toUpperCase()}</span>
+                    <div class="w-8 h-8 rounded-full brand-bg flex items-center justify-center">
+                        <span class="text-black text-sm font-medium">${email.charAt(0).toUpperCase()}</span>
                     </div>
                     <span class="text-sm font-medium hidden md:block">${email.split('@')[0]}</span>
                 `;
@@ -1010,7 +1094,7 @@
         // Show notification
         function showNotification(message) {
             const notification = document.createElement('div');
-            notification.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.className = 'fixed bottom-4 right-4 brand-bg text-black px-6 py-3 rounded-lg shadow-lg z-50';
             notification.textContent = message;
             document.body.appendChild(notification);
             
@@ -1026,7 +1110,7 @@
             
             // Simulate AI generation with a loading effect
             const resultDiv = document.getElementById('adCopyResult');
-            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin text-indigo-400 text-2xl"></i></div>';
+            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin brand-text text-2xl"></i></div>';
             
             setTimeout(() => {
                 resultDiv.innerHTML = `
@@ -1054,7 +1138,7 @@
             
             // Simulate AI analysis with a loading effect
             const resultDiv = document.getElementById('headlineResult');
-            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin text-purple-400 text-2xl"></i></div>';
+            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin brand-text text-2xl"></i></div>';
             
             setTimeout(() => {
                 resultDiv.innerHTML = `
@@ -1064,7 +1148,7 @@
                                 <h4 class="font-medium mb-2">Clarity Score</h4>
                                 <div class="flex items-center">
                                     <div class="w-full bg-slate-700 rounded-full h-2.5">
-                                        <div class="bg-green-500 h-2.5 rounded-full" style="width: 85%"></div>
+                                        <div class="brand-bg h-2.5 rounded-full" style="width: 85%"></div>
                                     </div>
                                     <span class="ml-2 text-sm">85%</span>
                                 </div>
@@ -1073,7 +1157,7 @@
                                 <h4 class="font-medium mb-2">Engagement Score</h4>
                                 <div class="flex items-center">
                                     <div class="w-full bg-slate-700 rounded-full h-2.5">
-                                        <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 70%"></div>
+                                        <div class="brand-bg h-2.5 rounded-full" style="width: 70%"></div>
                                     </div>
                                     <span class="ml-2 text-sm">70%</span>
                                 </div>
@@ -1103,7 +1187,7 @@
             
             // Simulate AI analysis with a loading effect
             const resultDiv = document.getElementById('croResult');
-            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin text-yellow-400 text-2xl"></i></div>';
+            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin brand-text text-2xl"></i></div>';
             
             setTimeout(() => {
                 resultDiv.innerHTML = `
@@ -1112,7 +1196,7 @@
                             <h4 class="font-medium mb-2">Overall Score</h4>
                             <div class="flex items-center">
                                 <div class="w-full bg-slate-700 rounded-full h-2.5">
-                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 65%"></div>
+                                    <div class="brand-bg h-2.5 rounded-full" style="width: 65%"></div>
                                 </div>
                                 <span class="ml-2 text-sm">65/100</span>
                             </div>
@@ -1151,7 +1235,7 @@
             
             // Simulate AI generation with a loading effect
             const resultDiv = document.getElementById('ugcResult');
-            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin text-red-400 text-2xl"></i></div>';
+            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin brand-text text-2xl"></i></div>';
             
             setTimeout(() => {
                 resultDiv.innerHTML = `
@@ -1188,11 +1272,18 @@
         // Simple interactive elements
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile menu toggle
-            const menuButton = document.querySelector('.fa-bars');
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const sidebar = document.querySelector('.sidebar');
             
-            if (menuButton && sidebar) {
-                menuButton.addEventListener('click', function() {
+            if (menuToggle && sidebar) {
+                menuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                });
+            }
+            
+            if (mobileMenuBtn && sidebar) {
+                mobileMenuBtn.addEventListener('click', function() {
                     sidebar.classList.toggle('active');
                 });
             }
