@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operator HQ AI - Command Center</title>
+    <title>Operator HQ AI - Internal Command Center</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -53,73 +53,159 @@
             background: linear-gradient(90deg, #4f46e5, #7c3aed);
         }
         
-        .integration-card {
+        .ai-tool-card {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #334155;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
         
-        .integration-card:hover {
-            transform: scale(1.05);
+        .ai-tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+        }
+        
+        .ai-tool-card:hover {
+            transform: translateY(-5px);
             border-color: #4f46e5;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.3);
         }
         
-        .ai-prompt {
+        .ai-tool-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            padding: 1.5rem;
+        }
+        
+        .form-input {
             background: #1e293b;
             border: 1px solid #334155;
             border-radius: 8px;
-            padding: 16px;
-            font-family: 'Courier New', monospace;
-            color: #94a3b8;
-            min-height: 120px;
-            resize: none;
+            padding: 12px;
+            color: #e2e8f0;
             width: 100%;
+            margin-bottom: 1rem;
         }
         
-        .ai-prompt:focus {
+        .form-input:focus {
             outline: none;
             border-color: #4f46e5;
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
         }
         
-        .tab {
-            padding: 8px 16px;
-            border-radius: 6px 6px 0 0;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .tab.active {
+        .form-textarea {
             background: #1e293b;
-            border-bottom: 3px solid #4f46e5;
-            color: #a5b4fc;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px;
+            color: #e2e8f0;
+            width: 100%;
+            min-height: 120px;
+            resize: vertical;
+            margin-bottom: 1rem;
         }
         
-        .tab:hover:not(.active) {
+        .form-textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.4);
+        }
+        
+        .btn-secondary {
             background: #334155;
+            color: #e2e8f0;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
-        .client-item {
-            border-left: 3px solid transparent;
-            transition: all 0.2s ease;
+        .btn-secondary:hover {
+            background: #475569;
         }
         
-        .client-item:hover {
-            border-left-color: #4f46e5;
-            background: rgba(79, 70, 229, 0.1);
+        .output-container {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            min-height: 150px;
         }
         
-        .team-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        .output-placeholder {
+            color: #94a3b8;
+            font-style: italic;
         }
         
         .status-indicator {
@@ -145,18 +231,22 @@
             box-shadow: 0 0 8px #f87171;
         }
         
-        .chart-container {
-            height: 200px;
-            position: relative;
+        .tab {
+            padding: 8px 16px;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 3px solid transparent;
         }
         
-        .chart-bar {
-            position: absolute;
-            bottom: 0;
-            width: 12%;
-            background: linear-gradient(180deg, #4f46e5, #7c3aed);
-            border-radius: 4px 4px 0 0;
-            transition: height 0.5s ease;
+        .tab.active {
+            background: #1e293b;
+            border-bottom: 3px solid #4f46e5;
+            color: #a5b4fc;
+        }
+        
+        .tab:hover:not(.active) {
+            background: #334155;
         }
         
         @media (max-width: 768px) {
@@ -171,6 +261,11 @@
             
             .sidebar.active {
                 left: 0;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 1rem;
             }
         }
     </style>
@@ -208,8 +303,8 @@
                         <i class="fas fa-user-friends w-5"></i>
                         <span>Team</span>
                     </a>
-                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 transition">
-                        <i class="fas fa-robot w-5"></i>
+                    <a href="#" class="flex items-center space-x-3 p-3 rounded-lg bg-indigo-900 bg-opacity-30 text-indigo-300">
+                        <i class="fas fa-magic w-5"></i>
                         <span>AI Tools</span>
                     </a>
                     <a href="#" class="flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 transition">
@@ -267,451 +362,226 @@
             <!-- Dashboard Content -->
             <main class="flex-1 overflow-y-auto p-6 bg-slate-900">
                 <div class="mb-6">
-                    <h1 class="text-2xl font-bold mb-2">Command Center</h1>
-                    <p class="text-slate-400">Welcome back! Here's what's happening with your business today.</p>
+                    <h1 class="text-2xl font-bold mb-2">Client Service AI Tools</h1>
+                    <p class="text-slate-400">Internal tools to help you deliver exceptional results for your clients.</p>
                 </div>
                 
-                <!-- Metrics Overview -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="metric-card p-6 rounded-xl">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-slate-400 text-sm">Active Clients</p>
-                                <h3 class="text-2xl font-bold mt-1">24</h3>
-                            </div>
-                            <div class="w-12 h-12 rounded-lg bg-indigo-900 bg-opacity-30 flex items-center justify-center">
-                                <i class="fas fa-users text-indigo-400"></i>
-                            </div>
+                <!-- AI Tools Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Ad Copy Generator -->
+                    <div class="ai-tool-card p-6 rounded-xl" onclick="openModal('adCopyModal')">
+                        <div class="ai-tool-icon bg-gradient-to-r from-blue-500 to-indigo-600">
+                            <i class="fas fa-pen-fancy text-white"></i>
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-400 text-sm flex items-center">
-                                <i class="fas fa-arrow-up mr-1"></i> 12%
-                            </span>
-                            <span class="text-slate-500 text-sm ml-2">from last month</span>
+                        <h3 class="text-lg font-bold mb-2">Ad Copy Generator</h3>
+                        <p class="text-slate-400 text-sm mb-4">Create compelling ad copy for any platform with AI assistance.</p>
+                        <div class="flex items-center text-sm">
+                            <span class="status-indicator status-active"></span>
+                            <span>Ready to use</span>
                         </div>
                     </div>
                     
-                    <div class="metric-card p-6 rounded-xl">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-slate-400 text-sm">Active Campaigns</p>
-                                <h3 class="text-2xl font-bold mt-1">18</h3>
-                            </div>
-                            <div class="w-12 h-12 rounded-lg bg-purple-900 bg-opacity-30 flex items-center justify-center">
-                                <i class="fas fa-bullhorn text-purple-400"></i>
-                            </div>
+                    <!-- Headline Analyzer -->
+                    <div class="ai-tool-card p-6 rounded-xl" onclick="openModal('headlineModal')">
+                        <div class="ai-tool-icon bg-gradient-to-r from-purple-500 to-pink-600">
+                            <i class="fas fa-heading text-white"></i>
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-400 text-sm flex items-center">
-                                <i class="fas fa-arrow-up mr-1"></i> 8%
-                            </span>
-                            <span class="text-slate-500 text-sm ml-2">from last month</span>
+                        <h3 class="text-lg font-bold mb-2">Headline Analyzer</h3>
+                        <p class="text-slate-400 text-sm mb-4">Analyze and optimize headlines for maximum impact.</p>
+                        <div class="flex items-center text-sm">
+                            <span class="status-indicator status-active"></span>
+                            <span>Ready to use</span>
                         </div>
                     </div>
                     
-                    <div class="metric-card p-6 rounded-xl">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-slate-400 text-sm">Revenue</p>
-                                <h3 class="text-2xl font-bold mt-1">$42.8K</h3>
-                            </div>
-                            <div class="w-12 h-12 rounded-lg bg-blue-900 bg-opacity-30 flex items-center justify-center">
-                                <i class="fas fa-dollar-sign text-blue-400"></i>
-                            </div>
+                    <!-- Ad Spy Tool -->
+                    <div class="ai-tool-card p-6 rounded-xl" onclick="openModal('adSpyModal')">
+                        <div class="ai-tool-icon bg-gradient-to-r from-green-500 to-emerald-600">
+                            <i class="fas fa-eye text-white"></i>
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-green-400 text-sm flex items-center">
-                                <i class="fas fa-arrow-up mr-1"></i> 24%
-                            </span>
-                            <span class="text-slate-500 text-sm ml-2">from last month</span>
+                        <h3 class="text-lg font-bold mb-2">Ad Spy Tool</h3>
+                        <p class="text-slate-400 text-sm mb-4">Discover competitors' top-performing ads and strategies.</p>
+                        <div class="flex items-center text-sm">
+                            <span class="status-indicator status-pending"></span>
+                            <span>In development</span>
                         </div>
                     </div>
                     
-                    <div class="metric-card p-6 rounded-xl">
-                        <div class="flex justify-between items-start mb-4">
-                            <div>
-                                <p class="text-slate-400 text-sm">Conversion Rate</p>
-                                <h3 class="text-2xl font-bold mt-1">4.8%</h3>
-                            </div>
-                            <div class="w-12 h-12 rounded-lg bg-green-900 bg-opacity-30 flex items-center justify-center">
-                                <i class="fas fa-chart-line text-green-400"></i>
-                            </div>
+                    <!-- CRO Audit Tool -->
+                    <div class="ai-tool-card p-6 rounded-xl" onclick="openModal('croModal')">
+                        <div class="ai-tool-icon bg-gradient-to-r from-yellow-500 to-amber-600">
+                            <i class="fas fa-chart-line text-white"></i>
                         </div>
-                        <div class="flex items-center">
-                            <span class="text-red-400 text-sm flex items-center">
-                                <i class="fas fa-arrow-down mr-1"></i> 2%
-                            </span>
-                            <span class="text-slate-500 text-sm ml-2">from last month</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-                    <!-- Clients & Projects -->
-                    <div class="lg:col-span-2">
-                        <div class="card rounded-xl p-6 mb-6">
-                            <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-xl font-bold">Clients & Projects</h2>
-                                <div class="flex space-x-2">
-                                    <button class="px-3 py-1 text-sm rounded-lg bg-slate-800 hover:bg-slate-700 transition">All</button>
-                                    <button class="px-3 py-1 text-sm rounded-lg hover:bg-slate-700 transition">Active</button>
-                                    <button class="px-3 py-1 text-sm rounded-lg hover:bg-slate-700 transition">Completed</button>
-                                </div>
-                            </div>
-                            
-                            <div class="space-y-4">
-                                <div class="client-item p-4 rounded-lg">
-                                    <div class="flex justify-between items-center">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center">
-                                                <span class="text-white font-bold">T</span>
-                                            </div>
-                                            <div>
-                                                <h3 class="font-medium">TechCorp Inc.</h3>
-                                                <p class="text-sm text-slate-400">Website Redesign</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-4">
-                                            <span class="text-sm px-2 py-1 rounded bg-blue-900 bg-opacity-30 text-blue-400">In Progress</span>
-                                            <span class="text-sm">$12,400</span>
-                                            <button class="text-slate-400 hover:text-white">
-                                                <i class="fas fa-ellipsis-h"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="client-item p-4 rounded-lg">
-                                    <div class="flex justify-between items-center">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center">
-                                                <span class="text-white font-bold">H</span>
-                                            </div>
-                                            <div>
-                                                <h3 class="font-medium">HealthPlus</h3>
-                                                <p class="text-sm text-slate-400">Mobile App Development</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-4">
-                                            <span class="text-sm px-2 py-1 rounded bg-green-900 bg-opacity-30 text-green-400">Completed</span>
-                                            <span class="text-sm">$24,800</span>
-                                            <button class="text-slate-400 hover:text-white">
-                                                <i class="fas fa-ellipsis-h"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="client-item p-4 rounded-lg">
-                                    <div class="flex justify-between items-center">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center">
-                                                <span class="text-white font-bold">F</span>
-                                            </div>
-                                            <div>
-                                                <h3 class="font-medium">FinanceFlow</h3>
-                                                <p class="text-sm text-slate-400">Marketing Campaign</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-4">
-                                            <span class="text-sm px-2 py-1 rounded bg-purple-900 bg-opacity-30 text-purple-400">Planning</span>
-                                            <span class="text-sm">$8,600</span>
-                                            <button class="text-slate-400 hover:text-white">
-                                                <i class="fas fa-ellipsis-h"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="client-item p-4 rounded-lg">
-                                    <div class="flex justify-between items-center">
-                                        <div class="flex items-center space-x-4">
-                                            <div class="w-10 h-10 rounded-lg bg-gradient-to-r from-yellow-500 to-amber-600 flex items-center justify-center">
-                                                <span class="text-white font-bold">E</span>
-                                            </div>
-                                            <div>
-                                                <h3 class="font-medium">EduTech Solutions</h3>
-                                                <p class="text-sm text-slate-400">SEO Optimization</p>
-                                            </div>
-                                        </div>
-                                        <div class="flex items-center space-x-4">
-                                            <span class="text-sm px-2 py-1 rounded bg-yellow-900 bg-opacity-30 text-yellow-400">On Hold</span>
-                                            <span class="text-sm">$5,200</span>
-                                            <button class="text-slate-400 hover:text-white">
-                                                <i class="fas fa-ellipsis-h"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Team Management -->
-                        <div class="card rounded-xl p-6">
-                            <div class="flex justify-between items-center mb-6">
-                                <h2 class="text-xl font-bold">Team Management</h2>
-                                <button class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-sm font-medium transition">
-                                    Add Team Member
-                                </button>
-                            </div>
-                            
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div class="flex items-center space-x-4 p-4 rounded-lg bg-slate-800">
-                                    <div class="team-avatar">JD</div>
-                                    <div class="flex-1">
-                                        <h3 class="font-medium">John Doe</h3>
-                                        <p class="text-sm text-slate-400">Project Manager</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <span class="status-indicator status-active"></span>
-                                        <span class="text-sm">Active</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-center space-x-4 p-4 rounded-lg bg-slate-800">
-                                    <div class="team-avatar">AS</div>
-                                    <div class="flex-1">
-                                        <h3 class="font-medium">Alex Smith</h3>
-                                        <p class="text-sm text-slate-400">Lead Developer</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <span class="status-indicator status-active"></span>
-                                        <span class="text-sm">Active</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-center space-x-4 p-4 rounded-lg bg-slate-800">
-                                    <div class="team-avatar">MJ</div>
-                                    <div class="flex-1">
-                                        <h3 class="font-medium">Maria Johnson</h3>
-                                        <p class="text-sm text-slate-400">UX Designer</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <span class="status-indicator status-pending"></span>
-                                        <span class="text-sm">Away</span>
-                                    </div>
-                                </div>
-                                
-                                <div class="flex items-center space-x-4 p-4 rounded-lg bg-slate-800">
-                                    <div class="team-avatar">RW</div>
-                                    <div class="flex-1">
-                                        <h3 class="font-medium">Robert Wilson</h3>
-                                        <p class="text-sm text-slate-400">Marketing Specialist</p>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <span class="status-indicator status-active"></span>
-                                        <span class="text-sm">Active</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <h3 class="text-lg font-bold mb-2">CRO Audit Tool</h3>
+                        <p class="text-slate-400 text-sm mb-4">GPT-powered conversion rate optimization audits.</p>
+                        <div class="flex items-center text-sm">
+                            <span class="status-indicator status-active"></span>
+                            <span>Ready to use</span>
                         </div>
                     </div>
                     
-                    <!-- Integrations & AI Tools -->
-                    <div>
-                        <!-- Integrations -->
-                        <div class="card rounded-xl p-6 mb-6">
-                            <h2 class="text-xl font-bold mb-6">Integrations</h2>
-                            
-                            <div class="grid grid-cols-2 gap-4">
-                                <div class="integration-card p-4 rounded-lg text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500 to-indigo-600 flex items-center justify-center mx-auto mb-3">
-                                        <i class="fab fa-slack text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-1">Slack</h3>
-                                    <p class="text-xs text-slate-400">Connected</p>
-                                </div>
-                                
-                                <div class="integration-card p-4 rounded-lg text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-green-500 to-emerald-600 flex items-center justify-center mx-auto mb-3">
-                                        <i class="fab fa-stripe text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-1">Stripe</h3>
-                                    <p class="text-xs text-slate-400">Connected</p>
-                                </div>
-                                
-                                <div class="integration-card p-4 rounded-lg text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-purple-500 to-pink-600 flex items-center justify-center mx-auto mb-3">
-                                        <i class="fas fa-database text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-1">Airtable</h3>
-                                    <p class="text-xs text-slate-400">Connected</p>
-                                </div>
-                                
-                                <div class="integration-card p-4 rounded-lg text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-yellow-500 to-amber-600 flex items-center justify-center mx-auto mb-3">
-                                        <i class="fas fa-tasks text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-1">ClickUp</h3>
-                                    <p class="text-xs text-slate-400">Connected</p>
-                                </div>
-                                
-                                <div class="integration-card p-4 rounded-lg text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-red-500 to-orange-600 flex items-center justify-center mx-auto mb-3">
-                                        <i class="fas fa-chart-pie text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-1">GA4</h3>
-                                    <p class="text-xs text-slate-400">Not Connected</p>
-                                </div>
-                                
-                                <div class="integration-card p-4 rounded-lg text-center">
-                                    <div class="w-12 h-12 rounded-lg bg-gradient-to-r from-teal-500 to-cyan-600 flex items-center justify-center mx-auto mb-3">
-                                        <i class="fas fa-crm text-white text-xl"></i>
-                                    </div>
-                                    <h3 class="font-medium mb-1">Pipedrive</h3>
-                                    <p class="text-xs text-slate-400">Not Connected</p>
-                                </div>
-                            </div>
-                            
-                            <button class="w-full mt-4 py-2 px-4 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-medium transition">
-                                Add Integration
-                            </button>
+                    <!-- UGC Script Writer -->
+                    <div class="ai-tool-card p-6 rounded-xl" onclick="openModal('ugcModal')">
+                        <div class="ai-tool-icon bg-gradient-to-r from-red-500 to-orange-600">
+                            <i class="fas fa-video text-white"></i>
                         </div>
-                        
-                        <!-- AI Tools -->
-                        <div class="card rounded-xl p-6">
-                            <h2 class="text-xl font-bold mb-6">AI Tools</h2>
-                            
-                            <div class="mb-4">
-                                <div class="flex space-x-2 mb-4">
-                                    <div class="tab active">Prompt Builder</div>
-                                    <div class="tab">AI Dashboard</div>
-                                    <div class="tab">AI Insights</div>
-                                </div>
-                                
-                                <div>
-                                    <label class="block text-sm font-medium mb-2">AI Prompt</label>
-                                    <textarea class="ai-prompt" placeholder="Enter your prompt here..."></textarea>
-                                    
-                                    <div class="flex justify-between items-center mt-4">
-                                        <div class="flex space-x-2">
-                                            <button class="px-3 py-1 text-sm rounded-lg bg-slate-800 hover:bg-slate-700 transition">Save</button>
-                                            <button class="px-3 py-1 text-sm rounded-lg bg-slate-800 hover:bg-slate-700 transition">Templates</button>
-                                        </div>
-                                        <button class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-lg text-sm font-medium transition">
-                                            Generate
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="mt-6">
-                                <h3 class="font-medium mb-3">Recent AI Activities</h3>
-                                <div class="space-y-3">
-                                    <div class="flex items-start space-x-3">
-                                        <div class="w-8 h-8 rounded-full bg-indigo-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
-                                            <i class="fas fa-robot text-indigo-400 text-sm"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm">Generated campaign copy for TechCorp</p>
-                                            <p class="text-xs text-slate-500 mt-1">2 hours ago</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="flex items-start space-x-3">
-                                        <div class="w-8 h-8 rounded-full bg-purple-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
-                                            <i class="fas fa-robot text-purple-400 text-sm"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm">Analyzed customer sentiment for HealthPlus</p>
-                                            <p class="text-xs text-slate-500 mt-1">Yesterday</p>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="flex items-start space-x-3">
-                                        <div class="w-8 h-8 rounded-full bg-blue-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
-                                            <i class="fas fa-robot text-blue-400 text-sm"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm">Created SEO keywords for FinanceFlow</p>
-                                            <p class="text-xs text-slate-500 mt-1">2 days ago</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <h3 class="text-lg font-bold mb-2">UGC Script Writer</h3>
+                        <p class="text-slate-400 text-sm mb-4">Generate authentic user-generated content scripts.</p>
+                        <div class="flex items-center text-sm">
+                            <span class="status-indicator status-active"></span>
+                            <span>Ready to use</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Lead Scoring AI -->
+                    <div class="ai-tool-card p-6 rounded-xl" onclick="openModal('leadScoringModal')">
+                        <div class="ai-tool-icon bg-gradient-to-r from-teal-500 to-cyan-600">
+                            <i class="fas fa-user-check text-white"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Lead Scoring AI</h3>
+                        <p class="text-slate-400 text-sm mb-4">AI-powered lead qualification and scoring system.</p>
+                        <div class="flex items-center text-sm">
+                            <span class="status-indicator status-pending"></span>
+                            <span>In development</span>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Analytics Section -->
-                <div class="card rounded-xl p-6">
+                <!-- Recent AI Activities -->
+                <div class="card rounded-xl p-6 mb-8">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-xl font-bold">Performance Analytics</h2>
-                        <div class="flex space-x-2">
-                            <select class="py-2 px-3 rounded-lg bg-slate-800 border border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                                <option>Last 7 days</option>
-                                <option>Last 30 days</option>
-                                <option>Last 90 days</option>
-                            </select>
-                            <button class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm font-medium transition">
-                                Export Report
-                            </button>
-                        </div>
+                        <h2 class="text-xl font-bold">Recent AI Activities</h2>
+                        <button class="text-sm text-indigo-400 hover:text-indigo-300">View All</button>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="md:col-span-2">
-                            <div class="chart-container">
-                                <div class="chart-bar" style="height: 60%; left: 5%;"></div>
-                                <div class="chart-bar" style="height: 80%; left: 20%;"></div>
-                                <div class="chart-bar" style="height: 45%; left: 35%;"></div>
-                                <div class="chart-bar" style="height: 90%; left: 50%;"></div>
-                                <div class="chart-bar" style="height: 75%; left: 65%;"></div>
-                                <div class="chart-bar" style="height: 85%; left: 80%;"></div>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
+                            <div class="w-10 h-10 rounded-full bg-indigo-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-pen-fancy text-indigo-400"></i>
                             </div>
-                            <div class="flex justify-between mt-2 text-sm text-slate-400">
-                                <span>Mon</span>
-                                <span>Tue</span>
-                                <span>Wed</span>
-                                <span>Thu</span>
-                                <span>Fri</span>
-                                <span>Sat</span>
-                                <span>Sun</span>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-medium">Ad Copy Generated</h3>
+                                    <span class="text-sm text-slate-500">2 hours ago</span>
+                                </div>
+                                <p class="text-sm text-slate-400 mt-1">Generated 5 ad variations for TechCorp's Facebook campaign</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="text-xs px-2 py-1 rounded bg-indigo-900 bg-opacity-30 text-indigo-400">Ad Copy Generator</span>
+                                    <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">TechCorp</span>
+                                </div>
                             </div>
                         </div>
                         
-                        <div>
-                            <h3 class="font-medium mb-4">Campaign Performance</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span>TechCorp</span>
-                                        <span>78%</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 rounded-full h-2">
-                                        <div class="bg-indigo-500 h-2 rounded-full" style="width: 78%"></div>
-                                    </div>
+                        <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
+                            <div class="w-10 h-10 rounded-full bg-yellow-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-chart-line text-yellow-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-medium">CRO Audit Completed</h3>
+                                    <span class="text-sm text-slate-500">Yesterday</span>
                                 </div>
-                                
-                                <div>
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span>HealthPlus</span>
-                                        <span>92%</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 rounded-full h-2">
-                                        <div class="bg-green-500 h-2 rounded-full" style="width: 92%"></div>
-                                    </div>
+                                <p class="text-sm text-slate-400 mt-1">Completed conversion audit for HealthPlus landing page</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="text-xs px-2 py-1 rounded bg-yellow-900 bg-opacity-30 text-yellow-400">CRO Audit</span>
+                                    <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">HealthPlus</span>
                                 </div>
-                                
-                                <div>
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span>FinanceFlow</span>
-                                        <span>65%</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 rounded-full h-2">
-                                        <div class="bg-purple-500 h-2 rounded-full" style="width: 65%"></div>
-                                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
+                            <div class="w-10 h-10 rounded-full bg-red-900 bg-opacity-30 flex items-center justify-center flex-shrink-0">
+                                <i class="fas fa-video text-red-400"></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between">
+                                    <h3 class="font-medium">UGC Script Created</h3>
+                                    <span class="text-sm text-slate-500">2 days ago</span>
                                 </div>
-                                
-                                <div>
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span>EduTech</span>
-                                        <span>48%</span>
-                                    </div>
-                                    <div class="w-full bg-slate-700 rounded-full h-2">
-                                        <div class="bg-yellow-500 h-2 rounded-full" style="width: 48%"></div>
-                                    </div>
+                                <p class="text-sm text-slate-400 mt-1">Created 3 TikTok scripts for FinanceFlow's new product launch</p>
+                                <div class="flex items-center mt-2">
+                                    <span class="text-xs px-2 py-1 rounded bg-red-900 bg-opacity-30 text-red-400">UGC Script Writer</span>
+                                    <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">FinanceFlow</span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AI Performance Metrics -->
+                <div class="card rounded-xl p-6">
+                    <h2 class="text-xl font-bold mb-6">AI Tool Performance</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="metric-card p-5 rounded-xl">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-slate-400 text-sm">Ad Copy Generated</p>
+                                    <h3 class="text-2xl font-bold mt-1">142</h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-indigo-900 bg-opacity-30 flex items-center justify-center">
+                                    <i class="fas fa-pen-fancy text-indigo-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-green-400 text-sm flex items-center">
+                                    <i class="fas fa-arrow-up mr-1"></i> 24%
+                                </span>
+                                <span class="text-slate-500 text-sm ml-2">from last month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card p-5 rounded-xl">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-slate-400 text-sm">CRO Audits</p>
+                                    <h3 class="text-2xl font-bold mt-1">28</h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-yellow-900 bg-opacity-30 flex items-center justify-center">
+                                    <i class="fas fa-chart-line text-yellow-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-green-400 text-sm flex items-center">
+                                    <i class="fas fa-arrow-up mr-1"></i> 12%
+                                </span>
+                                <span class="text-slate-500 text-sm ml-2">from last month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card p-5 rounded-xl">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-slate-400 text-sm">UGC Scripts</p>
+                                    <h3 class="text-2xl font-bold mt-1">67</h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-red-900 bg-opacity-30 flex items-center justify-center">
+                                    <i class="fas fa-video text-red-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-green-400 text-sm flex items-center">
+                                    <i class="fas fa-arrow-up mr-1"></i> 32%
+                                </span>
+                                <span class="text-slate-500 text-sm ml-2">from last month</span>
+                            </div>
+                        </div>
+                        
+                        <div class="metric-card p-5 rounded-xl">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <p class="text-slate-400 text-sm">Avg. Satisfaction</p>
+                                    <h3 class="text-2xl font-bold mt-1">94%</h3>
+                                </div>
+                                <div class="w-10 h-10 rounded-lg bg-green-900 bg-opacity-30 flex items-center justify-center">
+                                    <i class="fas fa-smile text-green-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="text-green-400 text-sm flex items-center">
+                                    <i class="fas fa-arrow-up mr-1"></i> 5%
+                                </span>
+                                <span class="text-slate-500 text-sm ml-2">from last month</span>
                             </div>
                         </div>
                     </div>
@@ -720,18 +590,474 @@
         </div>
     </div>
     
+    <!-- Ad Copy Generator Modal -->
+    <div id="adCopyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xl font-bold">Ad Copy Generator</h2>
+                <button onclick="closeModal('adCopyModal')" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="adCopyForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Product/Service</label>
+                            <input type="text" class="form-input" placeholder="e.g. Fitness app">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Target Audience</label>
+                            <input type="text" class="form-input" placeholder="e.g. Busy professionals">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Platform</label>
+                            <select class="form-input">
+                                <option>Facebook</option>
+                                <option>Instagram</option>
+                                <option>Google Ads</option>
+                                <option>LinkedIn</option>
+                                <option>TikTok</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Tone</label>
+                            <select class="form-input">
+                                <option>Professional</option>
+                                <option>Friendly</option>
+                                <option>Urgent</option>
+                                <option>Inspirational</option>
+                                <option>Humorous</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Key Benefits</label>
+                        <textarea class="form-textarea" placeholder="List the main benefits of your product/service..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Call to Action</label>
+                        <input type="text" class="form-input" placeholder="e.g. Sign up now">
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button type="button" onclick="closeModal('adCopyModal')" class="btn-secondary">Cancel</button>
+                        <button type="button" onclick="generateAdCopy()" class="btn-primary">Generate Ad Copy</button>
+                    </div>
+                </form>
+                
+                <div id="adCopyOutput" class="output-container" style="display: none;">
+                    <h3 class="font-medium mb-3">Generated Ad Copy</h3>
+                    <div id="adCopyResult" class="output-placeholder">Your generated ad copy will appear here...</div>
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button class="btn-secondary">Copy to Clipboard</button>
+                        <button class="btn-secondary">Export as PDF</button>
+                        <button class="btn-primary">Save to Client</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Headline Analyzer Modal -->
+    <div id="headlineModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xl font-bold">Headline Analyzer</h2>
+                <button onclick="closeModal('headlineModal')" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="headlineForm">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Headline to Analyze</label>
+                        <input type="text" class="form-input" placeholder="Enter your headline here...">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Target Audience</label>
+                        <input type="text" class="form-input" placeholder="e.g. Small business owners">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Industry</label>
+                        <select class="form-input">
+                            <option>Technology</option>
+                            <option>Healthcare</option>
+                            <option>Finance</option>
+                            <option>Retail</option>
+                            <option>Education</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button type="button" onclick="closeModal('headlineModal')" class="btn-secondary">Cancel</button>
+                        <button type="button" onclick="analyzeHeadline()" class="btn-primary">Analyze Headline</button>
+                    </div>
+                </form>
+                
+                <div id="headlineOutput" class="output-container" style="display: none;">
+                    <h3 class="font-medium mb-3">Headline Analysis</h3>
+                    <div id="headlineResult" class="output-placeholder">Your headline analysis will appear here...</div>
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button class="btn-secondary">Copy to Clipboard</button>
+                        <button class="btn-secondary">Export as PDF</button>
+                        <button class="btn-primary">Save to Client</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- CRO Audit Modal -->
+    <div id="croModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xl font-bold">CRO Audit Tool</h2>
+                <button onclick="closeModal('croModal')" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="croForm">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Website URL</label>
+                        <input type="text" class="form-input" placeholder="https://example.com">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Page Type</label>
+                        <select class="form-input">
+                            <option>Landing Page</option>
+                            <option>Product Page</option>
+                            <option>Checkout Page</option>
+                            <option>Homepage</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Conversion Goal</label>
+                        <input type="text" class="form-input" placeholder="e.g. Form submission, Purchase">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Current Conversion Rate (if known)</label>
+                        <input type="text" class="form-input" placeholder="e.g. 2.5%">
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button type="button" onclick="closeModal('croModal')" class="btn-secondary">Cancel</button>
+                        <button type="button" onclick="runCROAudit()" class="btn-primary">Run CRO Audit</button>
+                    </div>
+                </form>
+                
+                <div id="croOutput" class="output-container" style="display: none;">
+                    <h3 class="font-medium mb-3">CRO Audit Results</h3>
+                    <div id="croResult" class="output-placeholder">Your CRO audit results will appear here...</div>
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button class="btn-secondary">Copy to Clipboard</button>
+                        <button class="btn-secondary">Export as PDF</button>
+                        <button class="btn-primary">Save to Client</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- UGC Script Writer Modal -->
+    <div id="ugcModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xl font-bold">UGC Script Writer</h2>
+                <button onclick="closeModal('ugcModal')" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="ugcForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Product/Service</label>
+                            <input type="text" class="form-input" placeholder="e.g. Skincare product">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Platform</label>
+                            <select class="form-input">
+                                <option>TikTok</option>
+                                <option>Instagram Reels</option>
+                                <option>YouTube Shorts</option>
+                                <option>Facebook</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Key Features</label>
+                        <textarea class="form-textarea" placeholder="List the main features of your product/service..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Target Audience</label>
+                        <input type="text" class="form-input" placeholder="e.g. Young adults interested in skincare">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Script Style</label>
+                        <select class="form-input">
+                            <option>Problem-Solution</option>
+                            <option>Before-After</option>
+                            <option>Day in the Life</option>
+                            <option>How-To</option>
+                            <option>Unboxing</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button type="button" onclick="closeModal('ugcModal')" class="btn-secondary">Cancel</button>
+                        <button type="button" onclick="generateUGCScript()" class="btn-primary">Generate UGC Script</button>
+                    </div>
+                </form>
+                
+                <div id="ugcOutput" class="output-container" style="display: none;">
+                    <h3 class="font-medium mb-3">Generated UGC Script</h3>
+                    <div id="ugcResult" class="output-placeholder">Your generated UGC script will appear here...</div>
+                    <div class="flex justify-end space-x-3 mt-4">
+                        <button class="btn-secondary">Copy to Clipboard</button>
+                        <button class="btn-secondary">Export as PDF</button>
+                        <button class="btn-primary">Save to Client</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ad Spy Tool Modal -->
+    <div id="adSpyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xl font-bold">Ad Spy Tool</h2>
+                <button onclick="closeModal('adSpyModal')" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center py-10">
+                    <div class="w-16 h-16 rounded-full bg-yellow-900 bg-opacity-30 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-yellow-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Tool in Development</h3>
+                    <p class="text-slate-400 mb-6">The Ad Spy Tool is currently under development and will be available soon.</p>
+                    <button onclick="closeModal('adSpyModal')" class="btn-primary">Got it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Lead Scoring AI Modal -->
+    <div id="leadScoringModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="text-xl font-bold">Lead Scoring AI</h2>
+                <button onclick="closeModal('leadScoringModal')" class="text-slate-400 hover:text-white">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center py-10">
+                    <div class="w-16 h-16 rounded-full bg-teal-900 bg-opacity-30 flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-teal-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium mb-2">Tool in Development</h3>
+                    <p class="text-slate-400 mb-6">The Lead Scoring AI is currently under development and will be available soon.</p>
+                    <button onclick="closeModal('leadScoringModal')" class="btn-primary">Got it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        // Simulate AI tool functions
+        function generateAdCopy() {
+            document.getElementById('adCopyForm').style.display = 'none';
+            document.getElementById('adCopyOutput').style.display = 'block';
+            
+            // Simulate AI generation with a loading effect
+            const resultDiv = document.getElementById('adCopyResult');
+            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin text-indigo-400 text-2xl"></i></div>';
+            
+            setTimeout(() => {
+                resultDiv.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Option 1</h4>
+                            <p>Transform your fitness routine in just 15 minutes a day. Our app adapts to your schedule and helps busy professionals like you achieve their health goals without sacrificing productivity.</p>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Option 2</h4>
+                            <p>No time for the gym? No problem. Our AI-powered fitness app creates personalized workouts that fit into your busy schedule. Join thousands of professionals who are getting fit on their own terms.</p>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Option 3</h4>
+                            <p>Meet your new personal trainer - right in your pocket. Our app uses AI to create efficient workouts for busy professionals. Get fit without the time commitment. Sign up today!</p>
+                        </div>
+                    </div>
+                `;
+            }, 1500);
+        }
+        
+        function analyzeHeadline() {
+            document.getElementById('headlineForm').style.display = 'none';
+            document.getElementById('headlineOutput').style.display = 'block';
+            
+            // Simulate AI analysis with a loading effect
+            const resultDiv = document.getElementById('headlineResult');
+            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin text-purple-400 text-2xl"></i></div>';
+            
+            setTimeout(() => {
+                resultDiv.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-slate-800 rounded-lg">
+                                <h4 class="font-medium mb-2">Clarity Score</h4>
+                                <div class="flex items-center">
+                                    <div class="w-full bg-slate-700 rounded-full h-2.5">
+                                        <div class="bg-green-500 h-2.5 rounded-full" style="width: 85%"></div>
+                                    </div>
+                                    <span class="ml-2 text-sm">85%</span>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-slate-800 rounded-lg">
+                                <h4 class="font-medium mb-2">Engagement Score</h4>
+                                <div class="flex items-center">
+                                    <div class="w-full bg-slate-700 rounded-full h-2.5">
+                                        <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 70%"></div>
+                                    </div>
+                                    <span class="ml-2 text-sm">70%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Analysis</h4>
+                            <p>Your headline is clear and straightforward, which is good for conveying your message quickly. However, it lacks emotional triggers that could increase engagement. Consider adding power words or creating a sense of urgency to improve performance.</p>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Suggestions</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Add emotional triggers like "Discover" or "Unlock"</li>
+                                <li>Include a specific benefit or result</li>
+                                <li>Consider using numbers or statistics for credibility</li>
+                                <li>Create urgency with time-sensitive language</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }, 1500);
+        }
+        
+        function runCROAudit() {
+            document.getElementById('croForm').style.display = 'none';
+            document.getElementById('croOutput').style.display = 'block';
+            
+            // Simulate AI analysis with a loading effect
+            const resultDiv = document.getElementById('croResult');
+            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin text-yellow-400 text-2xl"></i></div>';
+            
+            setTimeout(() => {
+                resultDiv.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Overall Score</h4>
+                            <div class="flex items-center">
+                                <div class="w-full bg-slate-700 rounded-full h-2.5">
+                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 65%"></div>
+                                </div>
+                                <span class="ml-2 text-sm">65/100</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Key Issues</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Call-to-action button lacks contrast and visibility</li>
+                                <li>Page load time is above industry average (3.2s)</li>
+                                <li>Form has too many fields, increasing friction</li>
+                                <li>Missing trust signals (testimonials, security badges)</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Recommendations</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Increase CTA button size and use a contrasting color</li>
+                                <li>Optimize images and implement lazy loading to improve page speed</li>
+                                <li>Reduce form fields to only essential information</li>
+                                <li>Add customer testimonials and security badges above the fold</li>
+                                <li>Implement A/B testing for headlines and CTAs</li>
+                            </ul>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Potential Impact</h4>
+                            <p>Implementing these changes could potentially increase your conversion rate by 15-25% based on industry benchmarks and similar case studies.</p>
+                        </div>
+                    </div>
+                `;
+            }, 2000);
+        }
+        
+        function generateUGCScript() {
+            document.getElementById('ugcForm').style.display = 'none';
+            document.getElementById('ugcOutput').style.display = 'block';
+            
+            // Simulate AI generation with a loading effect
+            const resultDiv = document.getElementById('ugcResult');
+            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin text-red-400 text-2xl"></i></div>';
+            
+            setTimeout(() => {
+                resultDiv.innerHTML = `
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">TikTok UGC Script</h4>
+                            <p><strong>Opening:</strong> "POV: You've tried every skincare product but still struggle with [common problem]..."</p>
+                            <p><strong>Middle:</strong> "That was me until I discovered [product name]. Let me show you my before and after after just 2 weeks..."</p>
+                            <p><strong>Demo:</strong> "What I love about this is [key feature 1] and [key feature 2]. It's perfect for [target audience] because [benefit]."</p>
+                            <p><strong>Call to Action:</strong> "If you're ready to transform your skincare routine like I did, check out [product name] using my code [code] for 15% off!"</p>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Instagram Reels UGC Script</h4>
+                            <p><strong>Opening:</strong> "The skincare secret I wish I knew sooner..."</p>
+                            <p><strong>Middle:</strong> "As someone with [skin type], finding the right products was a struggle until I found [product name]."</p>
+                            <p><strong>Demo:</strong> "Watch how [key feature] works on my skin. It's so gentle yet effective!"</p>
+                            <p><strong>Call to Action:</strong> "Click the link in my bio to try [product name] for yourself. Use code [code] for a special discount!"</p>
+                        </div>
+                        <div class="p-4 bg-slate-800 rounded-lg">
+                            <h4 class="font-medium mb-2">Production Tips</h4>
+                            <ul class="list-disc pl-5 space-y-1">
+                                <li>Use natural lighting for authentic look</li>
+                                <li>Keep transitions quick and engaging</li>
+                                <li>Show genuine emotion and excitement</li>
+                                <li>Include text overlays for key points</li>
+                                <li>Use trending sounds for maximum reach</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }, 1800);
+        }
+        
         // Simple interactive elements
         document.addEventListener('DOMContentLoaded', function() {
-            // Tab switching
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-            
             // Mobile menu toggle
             const menuButton = document.querySelector('.fa-bars');
             const sidebar = document.querySelector('.sidebar');
@@ -741,6 +1067,16 @@
                     sidebar.classList.toggle('active');
                 });
             }
+            
+            // Close modals when clicking outside
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
         });
     </script>
 </body>
