@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operator HQ AI - Adspend Agency</title>
+    <title>AI Tools Portal - Adspend Agency</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --brand-color: #c1ff72;
             --brand-dark: #a0e65c;
+            --brand-light: #d8ff9e;
         }
         
         * {
@@ -22,52 +23,35 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: #000000;
             color: #e2e8f0;
+            overflow-x: hidden;
         }
         
-        .sidebar {
-            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-            border-right: 1px solid #334155;
+        .brand-bg {
+            background-color: var(--brand-color);
+            color: #000000;
+        }
+        
+        .brand-text {
+            color: var(--brand-color);
+        }
+        
+        .brand-border {
+            border-color: var(--brand-color);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(193, 255, 114, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
         }
         
         .card {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #334155;
             transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            border-color: var(--brand-color);
-        }
-        
-        .metric-card {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #334155;
             position: relative;
             overflow: hidden;
         }
         
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--brand-color);
-        }
-        
-        .ai-tool-card {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #334155;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .ai-tool-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
@@ -75,23 +59,109 @@
             width: 100%;
             height: 3px;
             background: var(--brand-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
         
-        .ai-tool-card:hover {
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(193, 255, 114, 0.2);
             border-color: var(--brand-color);
-            box-shadow: 0 10px 25px -5px rgba(193, 255, 114, 0.3);
         }
         
-        .ai-tool-icon {
-            width: 50px;
-            height: 50px;
+        .tool-icon {
+            width: 60px;
+            height: 60px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, rgba(193, 255, 114, 0.2) 0%, rgba(193, 255, 114, 0.05) 100%);
+            color: var(--brand-color);
+            border: 1px solid rgba(193, 255, 114, 0.3);
+        }
+        
+        .btn-primary {
+            background: var(--brand-color);
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--brand-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(193, 255, 114, 0.4);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--brand-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid var(--brand-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(193, 255, 114, 0.1);
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(193, 255, 114, 0.2);
+            border-color: var(--brand-color);
+        }
+        
+        .testimonial-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 60px;
+            color: rgba(193, 255, 114, 0.2);
+            font-family: Georgia, serif;
+        }
+        
+        .tech-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(193, 255, 114, 0.1);
+            color: var(--brand-color);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(193, 255, 114, 0.3);
         }
         
         .modal {
@@ -116,7 +186,7 @@
             border: 1px solid #334155;
             border-radius: 12px;
             width: 90%;
-            max-width: 800px;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
@@ -168,127 +238,17 @@
             box-shadow: 0 0 0 3px rgba(193, 255, 114, 0.2);
         }
         
-        .btn-primary {
-            background: var(--brand-color);
-            color: #000000;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background: var(--brand-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(193, 255, 114, 0.4);
-        }
-        
-        .btn-secondary {
-            background: #334155;
-            color: #e2e8f0;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: #475569;
-        }
-        
-        .btn-login {
-            background: var(--brand-color);
-            color: #000000;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-weight: 600;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-login:hover {
-            background: var(--brand-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(193, 255, 114, 0.4);
-        }
-        
-        .output-container {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-            min-height: 150px;
-        }
-        
-        .output-placeholder {
-            color: #94a3b8;
-            font-style: italic;
-        }
-        
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 6px;
-        }
-        
-        .status-active {
-            background-color: #4ade80;
-            box-shadow: 0 0 8px #4ade80;
-        }
-        
-        .status-pending {
-            background-color: #fbbf24;
-            box-shadow: 0 0 8px #fbbf24;
-        }
-        
-        .status-inactive {
-            background-color: #f87171;
-            box-shadow: 0 0 8px #f87171;
-        }
-        
-        .tab {
-            padding: 8px 16px;
-            border-radius: 6px 6px 0 0;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-bottom: 3px solid transparent;
-        }
-        
-        .tab.active {
-            background: #1e293b;
-            border-bottom: 3px solid var(--brand-color);
-            color: var(--brand-color);
-        }
-        
-        .tab:hover:not(.active) {
-            background: #334155;
-        }
-        
-        .brand-text {
-            color: var(--brand-color);
-        }
-        
-        .brand-bg {
-            background-color: var(--brand-color);
-            color: #000000;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
+        .floating-menu {
             position: fixed;
             bottom: 20px;
             right: 20px;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .fab {
             width: 56px;
             height: 56px;
             border-radius: 50%;
@@ -296,405 +256,840 @@
             color: #000000;
             border: none;
             box-shadow: 0 4px 12px rgba(193, 255, 114, 0.4);
-            z-index: 99;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .fab:hover {
+            transform: scale(1.1);
+        }
+        
+        .fab-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-bottom: 10px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .fab-menu.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+        
+        .fab-option {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #1e293b;
+            color: var(--brand-color);
+            border: 1px solid var(--brand-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .fab-option:hover {
+            background: var(--brand-color);
+            color: #000000;
         }
         
         @media (max-width: 768px) {
-            .sidebar {
-                position: fixed;
-                left: -100%;
-                width: 80%;
-                height: 100%;
-                z-index: 100;
-                transition: left 0.3s ease;
+            .hero-title {
+                font-size: 2.5rem;
             }
             
-            .sidebar.active {
-                left: 0;
-            }
-            
-            .modal-content {
-                width: 95%;
-                margin: 1rem;
-            }
-            
-            .mobile-menu-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            
-            .dashboard-grid {
+            .tool-grid {
                 grid-template-columns: 1fr;
             }
             
-            .ai-tools-grid {
+            .feature-grid {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        .glow {
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--brand-color), 0 0 20px var(--brand-color);
+            }
+            to {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--brand-color), 0 0 40px var(--brand-color);
+            }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(193, 255, 114, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(193, 255, 114, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(193, 255, 114, 0);
+            }
+        }
+        
+        .operator-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid #334155;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .operator-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px -10px rgba(193, 255, 114, 0.3);
+            border-color: var(--brand-color);
+        }
+        
+        .operator-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--brand-color);
+        }
+        
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .price-note {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            margin-bottom: 1rem;
+        }
+        
+        .hardware-image {
+            width: 100%;
+            height: 160px;
+            background: linear-gradient(135deg, rgba(193, 255, 114, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hardware-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1593640408182-31c70c8268a5?auto=format&fit=crop&w=600&q=80') center/cover;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        
+        .hardware-icon {
+            position: relative;
+            z-index: 1;
+            font-size: 3rem;
+            color: var(--brand-color);
         }
     </style>
 </head>
 <body>
-    <div class="flex h-screen overflow-hidden">
-        <!-- Sidebar -->
-        <div class="sidebar w-64 flex-shrink-0 hidden md:block">
-            <div class="p-6">
-                <div class="flex items-center space-x-3 mb-10">
-                    <div class="w-10 h-10 rounded-lg brand-bg flex items-center justify-center">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold">Operator HQ</h1>
-                        <p class="text-xs brand-text">Adspend Agency</p>
-                    </div>
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black bg-opacity-90 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-lg brand-bg flex items-center justify-center">
+                    <i class="fas fa-rocket"></i>
                 </div>
-                
-                <nav class="space-y-1">
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg bg-opacity-30 text-brand-color">
-                        <i class="fas fa-home w-5"></i>
-                        <span>Dashboard</span>
-                    </a>
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 transition">
-                        <i class="fas fa-users w-5"></i>
-                        <span>Clients</span>
-                    </a>
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 transition">
-                        <i class="fas fa-bullhorn w-5"></i>
-                        <span>Campaigns</span>
-                    </a>
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 transition">
-                        <i class="fas fa-tasks w-5"></i>
-                        <span>Projects</span>
-                    </a>
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 transition">
-                        <i class="fas fa-user-friends w-5"></i>
-                        <span>Team</span>
-                    </a>
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg bg-opacity-30 text-brand-color">
-                        <i class="fas fa-magic w-5"></i>
-                        <span>AI Tools</span>
-                    </a>
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 transition">
-                        <i class="fas fa-chart-line w-5"></i>
-                        <span>Analytics</span>
-                    </a>
-                    <a href="#" class="nav-link flex items-center space-x-3 p-3 rounded-lg hover:bg-slate-700 transition">
-                        <i class="fas fa-cog w-5"></i>
-                        <span>Settings</span>
-                    </a>
-                </nav>
-                
-                <div class="mt-10 p-4 rounded-lg bg-slate-800 border border-slate-700">
-                    <div class="flex items-center space-x-3 mb-3">
-                        <div class="w-8 h-8 rounded-full brand-bg flex items-center justify-center">
-                            <i class="fas fa-plus text-black text-xs"></i>
+                <div>
+                    <h1 class="text-xl font-bold">Adspend Agency</h1>
+                    <p class="text-xs brand-text">AI Tools Portal</p>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#tools" class="hover:text-brand-color transition">Tools</a>
+                <a href="#features" class="hover:text-brand-color transition">Features</a>
+                <a href="#operator" class="hover:text-brand-color transition">Operator</a>
+                <a href="#testimonials" class="hover:text-brand-color transition">Testimonials</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="loginBtn" class="btn-secondary">Login</button>
+                <button id="signupBtn" class="btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6 hero-gradient">
+        <div class="container mx-auto max-w-6xl">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="hero-title text-5xl md:text-6xl font-bold mb-6">
+                        Revolutionary AI Tools for <span class="brand-text glow">Your Business</span>
+                    </h1>
+                    <p class="text-xl text-gray-300 mb-8">
+                        Transform your advertising and content creation with cutting-edge AI technology. 
+                        Create, optimize, and scale your marketing efforts like never before.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="btn-primary pulse">Get Started Free</button>
+                        <button class="btn-secondary">Watch Demo</button>
+                    </div>
+                    
+                    <div class="mt-10 flex items-center space-x-6">
+                        <div>
+                            <p class="text-3xl font-bold brand-text">50+</p>
+                            <p class="text-gray-400">AI Tools</p>
                         </div>
-                        <span class="font-medium">Create New</span>
+                        <div>
+                            <p class="text-3xl font-bold brand-text">10K+</p>
+                            <p class="text-gray-400">Businesses</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold brand-text">98%</p>
+                            <p class="text-gray-400">Satisfaction</p>
+                        </div>
                     </div>
-                    <button class="w-full py-2 px-4 brand-bg rounded-lg text-sm font-medium transition">
-                        New Project
-                    </button>
                 </div>
                 
-                <div class="mt-8 text-center">
-                    <p class="text-xs text-slate-500">© 2025 Adspend Agency</p>
-                    <p class="text-xs text-slate-500"> x </p>
-                    <p class="text-xs text-slate-500">Operator HQ AI</p>
-                    <p class="text-xs brand-text font-medium mt-1">We Run Ads & Scale AI</p>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full brand-bg opacity-10 absolute -top-10 -left-10"></div>
+                        <div class="relative z-10 bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-6 shadow-2xl">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-bold">AI Campaign Architect</h3>
+                                <span class="tech-badge">NEW</span>
+                            </div>
+                            <div class="space-y-4 mb-6">
+                                <div>
+                                    <p class="text-sm text-gray-400 mb-1">Business Goal</p>
+                                    <p class="font-medium">Increase online sales by 30%</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400 mb-1">Target Audience</p>
+                                    <p class="font-medium">Tech-savvy professionals, 25-40</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gray-400 mb-1">Budget</p>
+                                    <p class="font-medium">$5,000/month</p>
+                                </div>
+                            </div>
+                            <button class="btn-primary w-full">Generate Campaign</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden">
-            <!-- Top Header -->
-            <header class="bg-slate-800 border-b border-slate-700 py-4 px-6 flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <button id="menuToggle" class="md:hidden text-slate-300">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                    <div class="relative">
-                        <input type="text" placeholder="Search clients, campaigns, projects..." class="w-64 py-2 px-4 pl-10 rounded-lg bg-slate-700 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-color focus:border-transparent">
-                        <i class="fas fa-search absolute left-3 top-3 text-slate-400"></i>
-                    </div>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <button class="relative p-2 rounded-full hover:bg-slate-700 transition">
-                        <i class="fas fa-bell text-slate-300"></i>
-                        <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-                    </button>
-                    <div id="userProfile" class="flex items-center space-x-2">
-                        <button id="loginBtn" class="btn-login">
-                            <i class="fas fa-sign-in-alt"></i>
-                            <span>Login</span>
-                        </button>
-                    </div>
-                </div>
-            </header>
-            
-            <!-- Dashboard Content -->
-            <main class="flex-1 overflow-y-auto p-6 bg-black">
-                <div class="mb-6">
-                    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
-                        <div>
-                            <h1 class="text-2xl font-bold mb-2">Client Service AI Tools</h1>
-                            <p class="text-slate-400">Internal tools to help you deliver exceptional results for your clients.</p>
-                        </div>
-                        <div class="mt-4 md:mt-0">
-                            <div class="flex items-center space-x-2">
-                                <span class="text-sm brand-text">Adspend Agency</span>
-                                <span class="text-xs text-slate-500">•</span>
-                                <span class="text-xs text-slate-500">We Run Ads</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- AI Tools Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 ai-tools-grid">
-                    <!-- Ad Copy Generator -->
-                    <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('adCopyModal')">
-                        <div class="ai-tool-icon brand-bg">
-                            <i class="fas fa-pen-fancy"></i>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2">Ad Copy Generator</h3>
-                        <p class="text-slate-400 text-sm mb-4">Create compelling ad copy for any platform with AI assistance.</p>
-                        <div class="flex items-center text-sm">
-                            <span class="status-indicator status-active"></span>
-                            <span>Ready to use</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Headline Analyzer -->
-                    <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('headlineModal')">
-                        <div class="ai-tool-icon brand-bg">
-                            <i class="fas fa-heading"></i>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2">Headline Analyzer</h3>
-                        <p class="text-slate-400 text-sm mb-4">Analyze and optimize headlines for maximum impact.</p>
-                        <div class="flex items-center text-sm">
-                            <span class="status-indicator status-active"></span>
-                            <span>Ready to use</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Ad Spy Tool -->
-                    <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('adSpyModal')">
-                        <div class="ai-tool-icon brand-bg">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2">Ad Spy Tool</h3>
-                        <p class="text-slate-400 text-sm mb-4">Discover competitors' top-performing ads and strategies.</p>
-                        <div class="flex items-center text-sm">
-                            <span class="status-indicator status-pending"></span>
-                            <span>In development</span>
-                        </div>
-                    </div>
-                    
-                    <!-- CRO Audit Tool -->
-                    <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('croModal')">
-                        <div class="ai-tool-icon brand-bg">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2">CRO Audit Tool</h3>
-                        <p class="text-slate-400 text-sm mb-4">GPT-powered conversion rate optimization audits.</p>
-                        <div class="flex items-center text-sm">
-                            <span class="status-indicator status-active"></span>
-                            <span>Ready to use</span>
-                        </div>
-                    </div>
-                    
-                    <!-- UGC Script Writer -->
-                    <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('ugcModal')">
-                        <div class="ai-tool-icon brand-bg">
-                            <i class="fas fa-video"></i>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2">UGC Script Writer</h3>
-                        <p class="text-slate-400 text-sm mb-4">Generate authentic user-generated content scripts.</p>
-                        <div class="flex items-center text-sm">
-                            <span class="status-indicator status-active"></span>
-                            <span>Ready to use</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Lead Scoring AI -->
-                    <div class="ai-tool-card p-6 rounded-xl" onclick="checkLoginAndOpen('leadScoringModal')">
-                        <div class="ai-tool-icon brand-bg">
-                            <i class="fas fa-user-check"></i>
-                        </div>
-                        <h3 class="text-lg font-bold mb-2">Lead Scoring AI</h3>
-                        <p class="text-slate-400 text-sm mb-4">AI-powered lead qualification and scoring system.</p>
-                        <div class="flex items-center text-sm">
-                            <span class="status-indicator status-pending"></span>
-                            <span>In development</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Recent AI Activities -->
-                <div class="card rounded-xl p-6 mb-8">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-xl font-bold">Recent AI Activities</h2>
-                        <button class="text-sm brand-text hover:text-brand-dark">View All</button>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
-                            <div class="w-10 h-10 rounded-full bg-opacity-30 flex items-center justify-center flex-shrink-0" style="background-color: rgba(193, 255, 114, 0.2);">
-                                <i class="fas fa-pen-fancy brand-text"></i>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between">
-                                    <h3 class="font-medium">Ad Copy Generated</h3>
-                                    <span class="text-sm text-slate-500">2 hours ago</span>
-                                </div>
-                                <p class="text-sm text-slate-400 mt-1">Generated 5 ad variations for TechCorp's Facebook campaign</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 brand-text" style="background-color: rgba(193, 255, 114, 0.1);">Ad Copy Generator</span>
-                                    <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">TechCorp</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
-                            <div class="w-10 h-10 rounded-full bg-opacity-30 flex items-center justify-center flex-shrink-0" style="background-color: rgba(193, 255, 114, 0.2);">
-                                <i class="fas fa-chart-line brand-text"></i>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between">
-                                    <h3 class="font-medium">CRO Audit Completed</h3>
-                                    <span class="text-sm text-slate-500">Yesterday</span>
-                                </div>
-                                <p class="text-sm text-slate-400 mt-1">Completed conversion audit for HealthPlus landing page</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 brand-text" style="background-color: rgba(193, 255, 114, 0.1);">CRO Audit</span>
-                                    <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">HealthPlus</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-4 p-4 rounded-lg bg-slate-800">
-                            <div class="w-10 h-10 rounded-full bg-opacity-30 flex items-center justify-center flex-shrink-0" style="background-color: rgba(193, 255, 114, 0.2);">
-                                <i class="fas fa-video brand-text"></i>
-                            </div>
-                            <div class="flex-1">
-                                <div class="flex justify-between">
-                                    <h3 class="font-medium">UGC Script Created</h3>
-                                    <span class="text-sm text-slate-500">2 days ago</span>
-                                </div>
-                                <p class="text-sm text-slate-400 mt-1">Created 3 TikTok scripts for FinanceFlow's new product launch</p>
-                                <div class="flex items-center mt-2">
-                                    <span class="text-xs px-2 py-1 rounded bg-opacity-20 brand-text" style="background-color: rgba(193, 255, 114, 0.1);">UGC Script Writer</span>
-                                    <span class="text-xs px-2 py-1 rounded bg-slate-700 text-slate-400 ml-2">FinanceFlow</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- AI Performance Metrics -->
-                <div class="card rounded-xl p-6">
-                    <h2 class="text-xl font-bold mb-6">AI Tool Performance</h2>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 dashboard-grid">
-                        <div class="metric-card p-5 rounded-xl">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <p class="text-slate-400 text-sm">Ad Copy Generated</p>
-                                    <h3 class="text-2xl font-bold mt-1">142</h3>
-                                </div>
-                                <div class="w-10 h-10 rounded-lg bg-opacity-30 flex items-center justify-center" style="background-color: rgba(193, 255, 114, 0.2);">
-                                    <i class="fas fa-pen-fancy brand-text"></i>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-green-400 text-sm flex items-center">
-                                    <i class="fas fa-arrow-up mr-1"></i> 24%
-                                </span>
-                                <span class="text-slate-500 text-sm ml-2">from last month</span>
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card p-5 rounded-xl">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <p class="text-slate-400 text-sm">CRO Audits</p>
-                                    <h3 class="text-2xl font-bold mt-1">28</h3>
-                                </div>
-                                <div class="w-10 h-10 rounded-lg bg-opacity-30 flex items-center justify-center" style="background-color: rgba(193, 255, 114, 0.2);">
-                                    <i class="fas fa-chart-line brand-text"></i>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-green-400 text-sm flex items-center">
-                                    <i class="fas fa-arrow-up mr-1"></i> 12%
-                                </span>
-                                <span class="text-slate-500 text-sm ml-2">from last month</span>
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card p-5 rounded-xl">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <p class="text-slate-400 text-sm">UGC Scripts</p>
-                                    <h3 class="text-2xl font-bold mt-1">67</h3>
-                                </div>
-                                <div class="w-10 h-10 rounded-lg bg-opacity-30 flex items-center justify-center" style="background-color: rgba(193, 255, 114, 0.2);">
-                                    <i class="fas fa-video brand-text"></i>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-green-400 text-sm flex items-center">
-                                    <i class="fas fa-arrow-up mr-1"></i> 32%
-                                </span>
-                                <span class="text-slate-500 text-sm ml-2">from last month</span>
-                            </div>
-                        </div>
-                        
-                        <div class="metric-card p-5 rounded-xl">
-                            <div class="flex justify-between items-start mb-4">
-                                <div>
-                                    <p class="text-slate-400 text-sm">Avg. Satisfaction</p>
-                                    <h3 class="text-2xl font-bold mt-1">94%</h3>
-                                </div>
-                                <div class="w-10 h-10 rounded-lg bg-opacity-30 flex items-center justify-center" style="background-color: rgba(193, 255, 114, 0.2);">
-                                    <i class="fas fa-smile brand-text"></i>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <span class="text-green-400 text-sm flex items-center">
-                                    <i class="fas fa-arrow-up mr-1"></i> 5%
-                                </span>
-                                <span class="text-slate-500 text-sm ml-2">from last month</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Footer -->
-                <div class="mt-8 text-center pb-6">
-                    <p class="text-sm brand-text font-medium">Adspend Agency</p>
-                    <p class="text-xs text-slate-500 mt-1">We Run Ads</p>
-                </div>
-            </main>
-        </div>
-    </div>
+    </section>
     
-    <!-- Mobile Menu Button -->
-    <button id="mobileMenuBtn" class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-    </button>
+    <!-- Revolutionary Features -->
+    <section id="features" class="py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Revolutionary AI Technology</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Our tools leverage cutting-edge LLM technology to deliver unprecedented marketing capabilities
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 feature-grid">
+                <div class="feature-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Multi-Modal Intelligence</h3>
+                    <p class="text-gray-400 mb-4">
+                        Our AI understands text, images, video, and audio to create cohesive marketing campaigns across all mediums.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="tech-badge">GPT-4</span>
+                        <span class="tech-badge">DALL-E</span>
+                        <span class="tech-badge">Whisper</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Contextual Understanding</h3>
+                    <p class="text-gray-400 mb-4">
+                        Advanced context awareness allows our AI to maintain brand voice and messaging consistency across all content.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="tech-badge">Vector DB</span>
+                        <span class="tech-badge">Embeddings</span>
+                        <span class="tech-badge">Fine-tuning</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Predictive Analytics</h3>
+                    <p class="text-gray-400 mb-4">
+                        Forecast campaign performance with AI-powered predictive models that learn from historical data.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="tech-badge">ML Models</span>
+                        <span class="tech-badge">Time Series</span>
+                        <span class="tech-badge">A/B Testing</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Real-Time Optimization</h3>
+                    <p class="text-gray-400 mb-4">
+                        Continuously optimize campaigns based on performance data and market trends in real-time.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="tech-badge">Reinforcement</span>
+                        <span class="tech-badge">Automation</span>
+                        <span class="tech-badge">APIs</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Enterprise Security</h3>
+                    <p class="text-gray-400 mb-4">
+                        Bank-level encryption and privacy controls ensure your data remains secure and compliant.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="tech-badge">E2E Encryption</span>
+                        <span class="tech-badge">SOC 2</span>
+                        <span class="tech-badge">GDPR</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Seamless Integration</h3>
+                    <p class="text-gray-400 mb-4">
+                        Connect with your existing marketing stack through our extensive API and integration ecosystem.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="tech-badge">REST API</span>
+                        <span class="tech-badge">Webhooks</span>
+                        <span class="tech-badge">Zapier</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- AI Tools Section -->
+    <section id="tools" class="py-20 px-6 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Powerful AI Tools at Your Fingertips</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Everything you need to create, optimize, and scale your marketing efforts
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 tool-grid">
+                <!-- Ad Copy Generator -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Ad Copy Generator</h3>
+                    <p class="text-gray-400 mb-4">
+                        Create compelling ad copy for any platform with AI assistance. Generate multiple variations optimized for different audiences.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+                
+                <!-- Visual Content Synthesizer -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Visual Content Synthesizer</h3>
+                    <p class="text-gray-400 mb-4">
+                        Generate stunning images and videos from text descriptions. Create brand-consistent visuals in seconds.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+                
+                <!-- Script Wizard -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Script Wizard</h3>
+                    <p class="text-gray-400 mb-4">
+                        Create engaging video scripts for any purpose. From product demos to viral TikToks, get professional scripts in minutes.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+                
+                <!-- AI Campaign Architect -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-drafting-compass"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Campaign Architect</h3>
+                    <p class="text-gray-400 mb-4">
+                        Design complete advertising campaigns from scratch. Get platform recommendations, budgets, and timelines.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+                
+                <!-- Competitor Intelligence -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Competitor Intelligence</h3>
+                    <p class="text-gray-400 mb-4">
+                        Analyze competitor strategies and discover opportunities. Get actionable insights to outperform your competition.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+                
+                <!-- Performance Predictor -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-crystal-ball"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Performance Predictor</h3>
+                    <p class="text-gray-400 mb-4">
+                        Forecast campaign performance before you spend. Get accurate predictions and optimization recommendations.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+                
+                <!-- Content Repurposing Engine -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Content Repurposing</h3>
+                    <p class="text-gray-400 mb-4">
+                        Transform existing content for different platforms. Turn a blog post into social media posts, videos, and more.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+                
+                <!-- AI Photo Editor -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">AI Photo Editor</h3>
+                    <p class="text-gray-400 mb-4">
+                        Edit and enhance photos with AI. Remove backgrounds, adjust colors, and add effects with simple text commands.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+                
+                <!-- Voiceover Generator -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Voiceover Generator</h3>
+                    <p class="text-gray-400 mb-4">
+                        Create natural-sounding voiceovers in multiple languages and accents. Perfect for videos, podcasts, and ads.
+                    </p>
+                    <button class="btn-primary w-full">Try Now</button>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="btn-secondary">View All 50+ Tools</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Get started in minutes and see results in days
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full brand-bg flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Choose Your Operator</h3>
+                    <p class="text-gray-400">
+                        Select the Operator package that fits your business needs and budget.
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full brand-bg flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Deploy AI Automations</h3>
+                    <p class="text-gray-400">
+                        Access our marketplace of AI tools and deploy them on your Operator device.
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full brand-bg flex items-center justify-center mx-auto mb-6">
+                        <span class="text-2xl font-bold">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Scale Your Business</h3>
+                    <p class="text-gray-400">
+                        Use AI to automate tasks, generate content, and optimize your marketing efforts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Operator HQ AI Section -->
+    <section id="operator" class="py-20 px-6 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Introducing Operator HQ AI</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Your own private AI powerhouse that puts cutting-edge technology directly in your hands
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Foundation Package -->
+                <div class="operator-card">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-2xl font-bold">Foundation Package</h3>
+                            <span class="tech-badge">STARTER</span>
+                        </div>
+                        
+                        <div class="hardware-image mb-6">
+                            <i class="fas fa-desktop hardware-icon"></i>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <p class="price-note">Starting at</p>
+                            <div class="price-tag brand-text">$10,000</div>
+                        </div>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">Mac Studio with M4 Chip</h4>
+                                    <p class="text-sm text-gray-400">Powerful hardware designed for AI workloads</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">Operator OS</h4>
+                                    <p class="text-sm text-gray-400">Our proprietary operating system</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">AI Automation Marketplace</h4>
+                                    <p class="text-sm text-gray-400">Access to 50+ pre-built AI tools and automations</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">Basic Support</h4>
+                                    <p class="text-sm text-gray-400">Email and chat support during business hours</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-primary w-full">Get Foundation Package</button>
+                        
+                        <p class="text-center text-sm text-gray-400 mt-4">
+                            Add our advertising services for a complete solution
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Operator Package -->
+                <div class="operator-card">
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-6">
+                            <h3 class="text-2xl font-bold">Operator Package</h3>
+                            <span class="tech-badge">PREMIUM</span>
+                        </div>
+                        
+                        <div class="hardware-image mb-6">
+                            <i class="fas fa-microchip hardware-icon"></i>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <p class="price-note">Starting at</p>
+                            <div class="price-tag brand-text">$35,000</div>
+                        </div>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">Custom Operator Creation</h4>
+                                    <p class="text-sm text-gray-400">Tailored hardware and software solution for your business</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">Advanced AI Frameworks</h4>
+                                    <p class="text-sm text-gray-400">Integration with Crew AI and other advanced systems</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">Complete Integration</h4>
+                                    <p class="text-sm text-gray-400">Seamless connection with your existing systems</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">Priority Support</h4>
+                                    <p class="text-sm text-gray-400">24/7 dedicated support with a success manager</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <i class="fas fa-check-circle brand-text mt-1 mr-3"></i>
+                                <div>
+                                    <h4 class="font-medium">Ongoing Optimization</h4>
+                                    <p class="text-sm text-gray-400">Regular updates and performance improvements</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-primary w-full">Get Operator Package</button>
+                        
+                        <p class="text-center text-sm text-gray-400 mt-4">
+                            Perfect for businesses that need a competitive edge
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <h3 class="text-2xl font-bold mb-4">Add Our Advertising Services</h3>
+                <p class="text-gray-300 max-w-3xl mx-auto mb-8">
+                    Enhance your Operator with our expert advertising services. Our team will help you create, manage, and optimize campaigns that deliver real results.
+                </p>
+                <button class="btn-secondary">Learn About Advertising Services</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Loved by Businesses Worldwide</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    See what our customers have to say about our AI tools
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-400">Marketing Director, TechCorp</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "The Operator Package completely transformed our marketing strategy. We saw a 300% ROI within the first month. It's like having a team of experts working 24/7."
+                    </p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Michael Chen</h4>
+                            <p class="text-sm text-gray-400">CEO, StartupX</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "As a startup, we couldn't afford a big marketing team. The Foundation Package leveled the playing field. We're now competing with industry leaders and winning."
+                    </p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="flex items-center mb-4">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">Emily Rodriguez</h4>
+                            <p class="text-sm text-gray-400">Content Creator, StyleHub</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">
+                        "The Visual Content Synthesizer is a game-changer. I can now create professional-looking visuals for my social media in minutes instead of hours. It's incredible!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="py-20 px-6 bg-gradient-to-r from-gray-900 to-black">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Revolutionize Your Business?</h2>
+            <p class="text-xl text-gray-300 mb-8">
+                Join thousands of businesses using Operator HQ AI to transform their operations
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button class="btn-primary pulse">Schedule a Consultation</button>
+                <button class="btn-secondary">Watch Demo</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-800">
+        <div class="container mx-auto max-w-6xl">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg brand-bg flex items-center justify-center">
+                            <i class="fas fa-rocket text-sm"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold">Adspend Agency</h3>
+                            <p class="text-xs brand-text">We Run Ads</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm">
+                        Revolutionary AI tools and Operator systems for modern businesses.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Product</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-brand-color transition">Operator HQ AI</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">Foundation Package</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">Operator Package</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">AI Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-brand-color transition">About</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-brand-color transition">Privacy</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">Terms</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">Security</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">Compliance</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    © 2023 Adspend Agency. All rights reserved.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-brand-color transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-brand-color transition">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Floating Action Button -->
+    <div class="floating-menu">
+        <div id="fabMenu" class="fab-menu">
+            <button class="fab-option" title="Chat with AI">
+                <i class="fas fa-comments"></i>
+            </button>
+            <button class="fab-option" title="Quick Tools">
+                <i class="fas fa-tools"></i>
+            </button>
+            <button class="fab-option" title="Help">
+                <i class="fas fa-question-circle"></i>
+            </button>
+        </div>
+        <button id="fabToggle" class="fab">
+            <i class="fas fa-plus"></i>
+        </button>
+    </div>
     
     <!-- Login Modal -->
     <div id="loginModal" class="modal">
-        <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-content">
             <div class="modal-header">
-                <div>
-                    <h2 class="text-xl font-bold">Login to Operator HQ</h2>
-                    <p class="text-sm brand-text">Adspend Agency</p>
-                </div>
+                <h2 class="text-xl font-bold">Login to Your Account</h2>
                 <button onclick="closeModal('loginModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -723,338 +1118,65 @@
                 </form>
                 
                 <div class="mt-6 text-center">
-                    <p class="text-sm text-slate-400">Don't have an account? <a href="#" class="brand-text hover:text-brand-dark">Contact your admin</a></p>
-                </div>
-                
-                <div class="mt-6 pt-4 border-t border-slate-700 text-center">
-                    <p class="text-xs brand-text font-medium">Adspend Agency</p>
-                    <p class="text-xs text-slate-500 mt-1">We Run Ads</p>
+                    <p class="text-sm text-slate-400">Don't have an account? <a href="#" class="brand-text hover:text-brand-dark">Sign up</a></p>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Ad Copy Generator Modal -->
-    <div id="adCopyModal" class="modal">
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <div>
-                    <h2 class="text-xl font-bold">Ad Copy Generator</h2>
-                    <p class="text-sm brand-text">Adspend Agency</p>
-                </div>
-                <button onclick="closeModal('adCopyModal')" class="text-slate-400 hover:text-white">
+                <h2 class="text-xl font-bold">Create Your Account</h2>
+                <button onclick="closeModal('signupModal')" class="text-slate-400 hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="adCopyForm">
+                <form id="signupForm">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium mb-2">Product/Service</label>
-                            <input type="text" class="form-input" placeholder="e.g. Fitness app">
+                            <label class="block text-sm font-medium mb-2">First Name</label>
+                            <input type="text" class="form-input" placeholder="John" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium mb-2">Target Audience</label>
-                            <input type="text" class="form-input" placeholder="e.g. Busy professionals">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Platform</label>
-                            <select class="form-input">
-                                <option>Facebook</option>
-                                <option>Instagram</option>
-                                <option>Google Ads</option>
-                                <option>LinkedIn</option>
-                                <option>TikTok</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Tone</label>
-                            <select class="form-input">
-                                <option>Professional</option>
-                                <option>Friendly</option>
-                                <option>Urgent</option>
-                                <option>Inspirational</option>
-                                <option>Humorous</option>
-                            </select>
+                            <label class="block text-sm font-medium mb-2">Last Name</label>
+                            <input type="text" class="form-input" placeholder="Doe" required>
                         </div>
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium mb-2">Key Benefits</label>
-                        <textarea class="form-textarea" placeholder="List the main benefits of your product/service..."></textarea>
+                        <label class="block text-sm font-medium mb-2">Email</label>
+                        <input type="email" class="form-input" placeholder="your@email.com" required>
                     </div>
                     
                     <div>
-                        <label class="block text-sm font-medium mb-2">Call to Action</label>
-                        <input type="text" class="form-input" placeholder="e.g. Sign up now">
+                        <label class="block text-sm font-medium mb-2">Password</label>
+                        <input type="password" class="form-input" placeholder="••••••••" required>
                     </div>
                     
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button type="button" onclick="closeModal('adCopyModal')" class="btn-secondary">Cancel</button>
-                        <button type="button" onclick="generateAdCopy()" class="btn-primary">Generate Ad Copy</button>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Company</label>
+                        <input type="text" class="form-input" placeholder="Your Company">
                     </div>
+                    
+                    <div class="flex items-center mb-4">
+                        <input type="checkbox" id="terms" class="mr-2" required>
+                        <label for="terms" class="text-sm">I agree to the <a href="#" class="brand-text hover:text-brand-dark">Terms of Service</a> and <a href="#" class="brand-text hover:text-brand-dark">Privacy Policy</a></label>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary w-full">Sign Up</button>
                 </form>
                 
-                <div id="adCopyOutput" class="output-container" style="display: none;">
-                    <h3 class="font-medium mb-3">Generated Ad Copy</h3>
-                    <div id="adCopyResult" class="output-placeholder">Your generated ad copy will appear here...</div>
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button class="btn-secondary">Copy to Clipboard</button>
-                        <button class="btn-secondary">Export as PDF</button>
-                        <button class="btn-primary">Save to Client</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Headline Analyzer Modal -->
-    <div id="headlineModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h2 class="text-xl font-bold">Headline Analyzer</h2>
-                    <p class="text-sm brand-text">Adspend Agency</p>
-                </div>
-                <button onclick="closeModal('headlineModal')" class="text-slate-400 hover:text-white">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="headlineForm">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Headline to Analyze</label>
-                        <input type="text" class="form-input" placeholder="Enter your headline here...">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Target Audience</label>
-                        <input type="text" class="form-input" placeholder="e.g. Small business owners">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Industry</label>
-                        <select class="form-input">
-                            <option>Technology</option>
-                            <option>Healthcare</option>
-                            <option>Finance</option>
-                            <option>Retail</option>
-                            <option>Education</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button type="button" onclick="closeModal('headlineModal')" class="btn-secondary">Cancel</button>
-                        <button type="button" onclick="analyzeHeadline()" class="btn-primary">Analyze Headline</button>
-                    </div>
-                </form>
-                
-                <div id="headlineOutput" class="output-container" style="display: none;">
-                    <h3 class="font-medium mb-3">Headline Analysis</h3>
-                    <div id="headlineResult" class="output-placeholder">Your headline analysis will appear here...</div>
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button class="btn-secondary">Copy to Clipboard</button>
-                        <button class="btn-secondary">Export as PDF</button>
-                        <button class="btn-primary">Save to Client</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- CRO Audit Modal -->
-    <div id="croModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h2 class="text-xl font-bold">CRO Audit Tool</h2>
-                    <p class="text-sm brand-text">Adspend Agency</p>
-                </div>
-                <button onclick="closeModal('croModal')" class="text-slate-400 hover:text-white">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="croForm">
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Website URL</label>
-                        <input type="text" class="form-input" placeholder="https://example.com">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Page Type</label>
-                        <select class="form-input">
-                            <option>Landing Page</option>
-                            <option>Product Page</option>
-                            <option>Checkout Page</option>
-                            <option>Homepage</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Conversion Goal</label>
-                        <input type="text" class="form-input" placeholder="e.g. Form submission, Purchase">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Current Conversion Rate (if known)</label>
-                        <input type="text" class="form-input" placeholder="e.g. 2.5%">
-                    </div>
-                    
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button type="button" onclick="closeModal('croModal')" class="btn-secondary">Cancel</button>
-                        <button type="button" onclick="runCROAudit()" class="btn-primary">Run CRO Audit</button>
-                    </div>
-                </form>
-                
-                <div id="croOutput" class="output-container" style="display: none;">
-                    <h3 class="font-medium mb-3">CRO Audit Results</h3>
-                    <div id="croResult" class="output-placeholder">Your CRO audit results will appear here...</div>
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button class="btn-secondary">Copy to Clipboard</button>
-                        <button class="btn-secondary">Export as PDF</button>
-                        <button class="btn-primary">Save to Client</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- UGC Script Writer Modal -->
-    <div id="ugcModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h2 class="text-xl font-bold">UGC Script Writer</h2>
-                    <p class="text-sm brand-text">Adspend Agency</p>
-                </div>
-                <button onclick="closeModal('ugcModal')" class="text-slate-400 hover:text-white">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="ugcForm">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Product/Service</label>
-                            <input type="text" class="form-input" placeholder="e.g. Skincare product">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Platform</label>
-                            <select class="form-input">
-                                <option>TikTok</option>
-                                <option>Instagram Reels</option>
-                                <option>YouTube Shorts</option>
-                                <option>Facebook</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Key Features</label>
-                        <textarea class="form-textarea" placeholder="List the main features of your product/service..."></textarea>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Target Audience</label>
-                        <input type="text" class="form-input" placeholder="e.g. Young adults interested in skincare">
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Script Style</label>
-                        <select class="form-input">
-                            <option>Problem-Solution</option>
-                            <option>Before-After</option>
-                            <option>Day in the Life</option>
-                            <option>How-To</option>
-                            <option>Unboxing</option>
-                        </select>
-                    </div>
-                    
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button type="button" onclick="closeModal('ugcModal')" class="btn-secondary">Cancel</button>
-                        <button type="button" onclick="generateUGCScript()" class="btn-primary">Generate UGC Script</button>
-                    </div>
-                </form>
-                
-                <div id="ugcOutput" class="output-container" style="display: none;">
-                    <h3 class="font-medium mb-3">Generated UGC Script</h3>
-                    <div id="ugcResult" class="output-placeholder">Your generated UGC script will appear here...</div>
-                    <div class="flex justify-end space-x-3 mt-4">
-                        <button class="btn-secondary">Copy to Clipboard</button>
-                        <button class="btn-secondary">Export as PDF</button>
-                        <button class="btn-primary">Save to Client</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Ad Spy Tool Modal -->
-    <div id="adSpyModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h2 class="text-xl font-bold">Ad Spy Tool</h2>
-                    <p class="text-sm brand-text">Adspend Agency</p>
-                </div>
-                <button onclick="closeModal('adSpyModal')" class="text-slate-400 hover:text-white">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center py-10">
-                    <div class="w-16 h-16 rounded-full bg-opacity-30 flex items-center justify-center mx-auto mb-4" style="background-color: rgba(193, 255, 114, 0.2);">
-                        <i class="fas fa-tools brand-text text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-medium mb-2">Tool in Development</h3>
-                    <p class="text-slate-400 mb-6">The Ad Spy Tool is currently under development and will be available soon.</p>
-                    <button onclick="closeModal('adSpyModal')" class="btn-primary">Got it</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Lead Scoring AI Modal -->
-    <div id="leadScoringModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div>
-                    <h2 class="text-xl font-bold">Lead Scoring AI</h2>
-                    <p class="text-sm brand-text">Adspend Agency</p>
-                </div>
-                <button onclick="closeModal('leadScoringModal')" class="text-slate-400 hover:text-white">
-                    <i class="fas fa-times text-xl"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center py-10">
-                    <div class="w-16 h-16 rounded-full bg-opacity-30 flex items-center justify-center mx-auto mb-4" style="background-color: rgba(193, 255, 114, 0.2);">
-                        <i class="fas fa-tools brand-text text-2xl"></i>
-                    </div>
-                    <h3 class="text-lg font-medium mb-2">Tool in Development</h3>
-                    <p class="text-slate-400 mb-6">The Lead Scoring AI is currently under development and will be available soon.</p>
-                    <button onclick="closeModal('leadScoringModal')" class="btn-primary">Got it</button>
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-slate-400">Already have an account? <a href="#" class="brand-text hover:text-brand-dark">Login</a></p>
                 </div>
             </div>
         </div>
     </div>
     
     <script>
-        // Authentication state
-        let isLoggedIn = false;
-        
-        // Check if user is logged in and open modal if they are
-        function checkLoginAndOpen(modalId) {
-            if (isLoggedIn) {
-                openModal(modalId);
-            } else {
-                openModal('loginModal');
-            }
-        }
-        
         // Modal functions
         function openModal(modalId) {
             document.getElementById(modalId).classList.add('active');
@@ -1064,33 +1186,28 @@
             document.getElementById(modalId).classList.remove('active');
         }
         
-        // Login form submission
+        // Login and Signup buttons
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            openModal('loginModal');
+        });
+        
+        document.getElementById('signupBtn').addEventListener('click', function() {
+            openModal('signupModal');
+        });
+        
+        // Form submissions
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Simulate login process
-            const email = this.querySelector('input[type="email"]').value;
-            const password = this.querySelector('input[type="password"]').value;
-            
             // In a real app, you would authenticate with a backend
-            // For demo purposes, we'll accept any non-empty credentials
-            if (email && password) {
-                isLoggedIn = true;
-                
-                // Update UI to show logged in state
-                document.getElementById('loginBtn').innerHTML = `
-                    <div class="w-8 h-8 rounded-full brand-bg flex items-center justify-center">
-                        <span class="text-black text-sm font-medium">${email.charAt(0).toUpperCase()}</span>
-                    </div>
-                    <span class="text-sm font-medium hidden md:block">${email.split('@')[0]}</span>
-                `;
-                
-                // Close login modal
-                closeModal('loginModal');
-                
-                // Show success message
-                showNotification('Login successful! You can now access all tools.');
-            }
+            closeModal('loginModal');
+            showNotification('Login successful! Welcome back.');
+        });
+        
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real app, you would register the user with a backend
+            closeModal('signupModal');
+            showNotification('Account created successfully! Welcome to Adspend Agency.');
         });
         
         // Show notification
@@ -1105,218 +1222,54 @@
             }, 3000);
         }
         
-        // Simulate AI tool functions
-        function generateAdCopy() {
-            document.getElementById('adCopyForm').style.display = 'none';
-            document.getElementById('adCopyOutput').style.display = 'block';
-            
-            // Simulate AI generation with a loading effect
-            const resultDiv = document.getElementById('adCopyResult');
-            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin brand-text text-2xl"></i></div>';
-            
-            setTimeout(() => {
-                resultDiv.innerHTML = `
-                    <div class="space-y-4">
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Option 1</h4>
-                            <p>Transform your fitness routine in just 15 minutes a day. Our app adapts to your schedule and helps busy professionals like you achieve their health goals without sacrificing productivity.</p>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Option 2</h4>
-                            <p>No time for the gym? No problem. Our AI-powered fitness app creates personalized workouts that fit into your busy schedule. Join thousands of professionals who are getting fit on their own terms.</p>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Option 3</h4>
-                            <p>Meet your new personal trainer - right in your pocket. Our app uses AI to create efficient workouts for busy professionals. Get fit without the time commitment. Sign up today!</p>
-                        </div>
-                    </div>
-                `;
-            }, 1500);
-        }
+        // Floating Action Button
+        const fabToggle = document.getElementById('fabToggle');
+        const fabMenu = document.getElementById('fabMenu');
         
-        function analyzeHeadline() {
-            document.getElementById('headlineForm').style.display = 'none';
-            document.getElementById('headlineOutput').style.display = 'block';
-            
-            // Simulate AI analysis with a loading effect
-            const resultDiv = document.getElementById('headlineResult');
-            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin brand-text text-2xl"></i></div>';
-            
-            setTimeout(() => {
-                resultDiv.innerHTML = `
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="p-4 bg-slate-800 rounded-lg">
-                                <h4 class="font-medium mb-2">Clarity Score</h4>
-                                <div class="flex items-center">
-                                    <div class="w-full bg-slate-700 rounded-full h-2.5">
-                                        <div class="brand-bg h-2.5 rounded-full" style="width: 85%"></div>
-                                    </div>
-                                    <span class="ml-2 text-sm">85%</span>
-                                </div>
-                            </div>
-                            <div class="p-4 bg-slate-800 rounded-lg">
-                                <h4 class="font-medium mb-2">Engagement Score</h4>
-                                <div class="flex items-center">
-                                    <div class="w-full bg-slate-700 rounded-full h-2.5">
-                                        <div class="brand-bg h-2.5 rounded-full" style="width: 70%"></div>
-                                    </div>
-                                    <span class="ml-2 text-sm">70%</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Analysis</h4>
-                            <p>Your headline is clear and straightforward, which is good for conveying your message quickly. However, it lacks emotional triggers that could increase engagement. Consider adding power words or creating a sense of urgency to improve performance.</p>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Suggestions</h4>
-                            <ul class="list-disc pl-5 space-y-1">
-                                <li>Add emotional triggers like "Discover" or "Unlock"</li>
-                                <li>Include a specific benefit or result</li>
-                                <li>Consider using numbers or statistics for credibility</li>
-                                <li>Create urgency with time-sensitive language</li>
-                            </ul>
-                        </div>
-                    </div>
-                `;
-            }, 1500);
-        }
-        
-        function runCROAudit() {
-            document.getElementById('croForm').style.display = 'none';
-            document.getElementById('croOutput').style.display = 'block';
-            
-            // Simulate AI analysis with a loading effect
-            const resultDiv = document.getElementById('croResult');
-            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin brand-text text-2xl"></i></div>';
-            
-            setTimeout(() => {
-                resultDiv.innerHTML = `
-                    <div class="space-y-4">
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Overall Score</h4>
-                            <div class="flex items-center">
-                                <div class="w-full bg-slate-700 rounded-full h-2.5">
-                                    <div class="brand-bg h-2.5 rounded-full" style="width: 65%"></div>
-                                </div>
-                                <span class="ml-2 text-sm">65/100</span>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Key Issues</h4>
-                            <ul class="list-disc pl-5 space-y-1">
-                                <li>Call-to-action button lacks contrast and visibility</li>
-                                <li>Page load time is above industry average (3.2s)</li>
-                                <li>Form has too many fields, increasing friction</li>
-                                <li>Missing trust signals (testimonials, security badges)</li>
-                            </ul>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Recommendations</h4>
-                            <ul class="list-disc pl-5 space-y-1">
-                                <li>Increase CTA button size and use a contrasting color</li>
-                                <li>Optimize images and implement lazy loading to improve page speed</li>
-                                <li>Reduce form fields to only essential information</li>
-                                <li>Add customer testimonials and security badges above the fold</li>
-                                <li>Implement A/B testing for headlines and CTAs</li>
-                            </ul>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Potential Impact</h4>
-                            <p>Implementing these changes could potentially increase your conversion rate by 15-25% based on industry benchmarks and similar case studies.</p>
-                        </div>
-                    </div>
-                `;
-            }, 2000);
-        }
-        
-        function generateUGCScript() {
-            document.getElementById('ugcForm').style.display = 'none';
-            document.getElementById('ugcOutput').style.display = 'block';
-            
-            // Simulate AI generation with a loading effect
-            const resultDiv = document.getElementById('ugcResult');
-            resultDiv.innerHTML = '<div class="flex items-center justify-center h-24"><i class="fas fa-spinner fa-spin brand-text text-2xl"></i></div>';
-            
-            setTimeout(() => {
-                resultDiv.innerHTML = `
-                    <div class="space-y-4">
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">TikTok UGC Script</h4>
-                            <p><strong>Opening:</strong> "POV: You've tried every skincare product but still struggle with [common problem]..."</p>
-                            <p><strong>Middle:</strong> "That was me until I discovered [product name]. Let me show you my before and after after just 2 weeks..."</p>
-                            <p><strong>Demo:</strong> "What I love about this is [key feature 1] and [key feature 2]. It's perfect for [target audience] because [benefit]."</p>
-                            <p><strong>Call to Action:</strong> "If you're ready to transform your skincare routine like I did, check out [product name] using my code [code] for 15% off!"</p>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Instagram Reels UGC Script</h4>
-                            <p><strong>Opening:</strong> "The skincare secret I wish I knew sooner..."</p>
-                            <p><strong>Middle:</strong> "As someone with [skin type], finding the right products was a struggle until I found [product name]."</p>
-                            <p><strong>Demo:</strong> "Watch how [key feature] works on my skin. It's so gentle yet effective!"</p>
-                            <p><strong>Call to Action:</strong> "Click the link in my bio to try [product name] for yourself. Use code [code] for a special discount!"</p>
-                        </div>
-                        <div class="p-4 bg-slate-800 rounded-lg">
-                            <h4 class="font-medium mb-2">Production Tips</h4>
-                            <ul class="list-disc pl-5 space-y-1">
-                                <li>Use natural lighting for authentic look</li>
-                                <li>Keep transitions quick and engaging</li>
-                                <li>Show genuine emotion and excitement</li>
-                                <li>Include text overlays for key points</li>
-                                <li>Use trending sounds for maximum reach</li>
-                            </ul>
-                        </div>
-                    </div>
-                `;
-            }, 1800);
-        }
-        
-        // Simple interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu toggle
-            const menuToggle = document.getElementById('menuToggle');
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const sidebar = document.querySelector('.sidebar');
-            
-            if (menuToggle && sidebar) {
-                menuToggle.addEventListener('click', function() {
-                    sidebar.classList.toggle('active');
-                });
+        fabToggle.addEventListener('click', function() {
+            fabMenu.classList.toggle('active');
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-plus')) {
+                icon.classList.remove('fa-plus');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-plus');
             }
-            
-            if (mobileMenuBtn && sidebar) {
-                mobileMenuBtn.addEventListener('click', function() {
-                    sidebar.classList.toggle('active');
-                });
-            }
-            
-            // Add click handlers to navigation links
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    if (!isLoggedIn) {
-                        openModal('loginModal');
-                    }
-                });
-            });
-            
-            // Close modals when clicking outside
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) {
-                        modal.classList.remove('active');
-                    }
-                });
-            });
-            
-            // Login button click handler
-            document.getElementById('loginBtn').addEventListener('click', function() {
-                if (!isLoggedIn) {
-                    openModal('loginModal');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
+        });
+        
+        // Close modals when clicking outside
+        const modals = document.querySelectorAll('.modal');
+        modals.forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+        
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-opacity-95');
+            } else {
+                nav.classList.remove('bg-opacity-95');
+            }
         });
     </script>
 </body>
