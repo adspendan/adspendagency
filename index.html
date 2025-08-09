@@ -322,17 +322,20 @@
             }
         }
         
-        .glow {
-            animation: glow 2s infinite alternate;
+        .superpower-text {
+            position: relative;
+            display: inline-block;
         }
         
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px var(--brand-color), 0 0 20px var(--brand-color);
-            }
-            to {
-                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px var(--brand-color), 0 0 40px var(--brand-color);
-            }
+        .superpower-text::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--brand-color);
+            border-radius: 3px;
         }
         
         .pulse {
@@ -455,11 +458,10 @@
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-10 md:mb-0">
                     <h1 class="hero-title text-5xl md:text-6xl font-bold mb-6">
-                        Revolutionary AI Tools for <span class="brand-text glow">Your Business</span>
+                        AI Tools That Give Your Business <span class="superpower-text brand-text">Superpowers</span>
                     </h1>
                     <p class="text-xl text-gray-300 mb-8">
-                        Transform your advertising and content creation with cutting-edge AI technology. 
-                        Create, optimize, and scale your marketing efforts like never before.
+                        Transform your operations with revolutionary AI automations. From personalized knowledge bots to voice synthesis, our tools give high-ticket businesses the competitive edge they need.
                     </p>
                     <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
                         <button class="btn-primary pulse">Get Started Free</button>
@@ -469,7 +471,7 @@
                     <div class="mt-10 flex items-center space-x-6">
                         <div>
                             <p class="text-3xl font-bold brand-text">50+</p>
-                            <p class="text-gray-400">AI Tools</p>
+                            <p class="text-gray-400">AI Automations</p>
                         </div>
                         <div>
                             <p class="text-3xl font-bold brand-text">10K+</p>
@@ -487,24 +489,24 @@
                         <div class="w-64 h-64 md:w-80 md:h-80 rounded-full brand-bg opacity-10 absolute -top-10 -left-10"></div>
                         <div class="relative z-10 bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-6 shadow-2xl">
                             <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-bold">AI Campaign Architect</h3>
-                                <span class="tech-badge">NEW</span>
+                                <h3 class="text-lg font-bold">AI Business Knowledge Bot</h3>
+                                <span class="tech-badge">GAMECHANGER</span>
                             </div>
                             <div class="space-y-4 mb-6">
                                 <div>
-                                    <p class="text-sm text-gray-400 mb-1">Business Goal</p>
-                                    <p class="font-medium">Increase online sales by 30%</p>
+                                    <p class="text-sm text-gray-400 mb-1">Industry</p>
+                                    <p class="font-medium">Healthcare / Legal / Finance</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-gray-400 mb-1">Target Audience</p>
-                                    <p class="font-medium">Tech-savvy professionals, 25-40</p>
+                                    <p class="text-sm text-gray-400 mb-1">Capability</p>
+                                    <p class="font-medium">Understands patient/client data</p>
                                 </div>
                                 <div>
-                                    <p class="text-sm text-gray-400 mb-1">Budget</p>
-                                    <p class="font-medium">$5,000/month</p>
+                                    <p class="text-sm text-gray-400 mb-1">Integration</p>
+                                    <p class="font-medium">Crew AI + ElevenLabs Voice</p>
                                 </div>
                             </div>
-                            <button class="btn-primary w-full">Generate Campaign</button>
+                            <button class="btn-primary w-full">Deploy Automation</button>
                         </div>
                     </div>
                 </div>
@@ -516,9 +518,9 @@
     <section id="features" class="py-20 px-6">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Revolutionary AI Technology</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Revolutionary AI Automations</h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Our tools leverage cutting-edge LLM technology to deliver unprecedented marketing capabilities
+                    Our cutting-edge AI frameworks deliver unprecedented business capabilities for high-ticket operations
                 </p>
             </div>
             
@@ -527,14 +529,29 @@
                     <div class="tool-icon">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Multi-Modal Intelligence</h3>
+                    <h3 class="text-xl font-bold mb-3">Business Knowledge Bots</h3>
                     <p class="text-gray-400 mb-4">
-                        Our AI understands text, images, video, and audio to create cohesive marketing campaigns across all mediums.
+                        AI assistants that understand your entire business context, from patient records to client histories. Perfect for healthcare, legal, and financial industries.
                     </p>
                     <div class="flex flex-wrap">
                         <span class="tech-badge">GPT-4</span>
-                        <span class="tech-badge">DALL-E</span>
+                        <span class="tech-badge">Vector DB</span>
+                        <span class="tech-badge">HIPAA</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="tool-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Voice Synthesis Systems</h3>
+                    <p class="text-gray-400 mb-4">
+                        Create custom voice agents using ElevenLabs or open-source models. Perfect for sales teams, customer service, and personalized client interactions.
+                    </p>
+                    <div class="flex flex-wrap">
+                        <span class="tech-badge">ElevenLabs</span>
                         <span class="tech-badge">Whisper</span>
+                        <span class="tech-badge">Custom TTS</span>
                     </div>
                 </div>
                 
@@ -542,14 +559,14 @@
                     <div class="tool-icon">
                         <i class="fas fa-project-diagram"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Contextual Understanding</h3>
+                    <h3 class="text-xl font-bold mb-3">Crew AI Workflows</h3>
                     <p class="text-gray-400 mb-4">
-                        Advanced context awareness allows our AI to maintain brand voice and messaging consistency across all content.
+                        Deploy sophisticated multi-agent systems that handle complex business processes. From lead qualification to closing deals, our AI agents work as a team.
                     </p>
                     <div class="flex flex-wrap">
-                        <span class="tech-badge">Vector DB</span>
-                        <span class="tech-badge">Embeddings</span>
-                        <span class="tech-badge">Fine-tuning</span>
+                        <span class="tech-badge">Crew AI</span>
+                        <span class="tech-badge">Multi-Agent</span>
+                        <span class="tech-badge">Automation</span>
                     </div>
                 </div>
                 
@@ -559,27 +576,12 @@
                     </div>
                     <h3 class="text-xl font-bold mb-3">Predictive Analytics</h3>
                     <p class="text-gray-400 mb-4">
-                        Forecast campaign performance with AI-powered predictive models that learn from historical data.
+                        Forecast business outcomes with AI-powered predictive models. Identify opportunities and risks before they materialize.
                     </p>
                     <div class="flex flex-wrap">
                         <span class="tech-badge">ML Models</span>
                         <span class="tech-badge">Time Series</span>
-                        <span class="tech-badge">A/B Testing</span>
-                    </div>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="tool-icon">
-                        <i class="fas fa-sync-alt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Real-Time Optimization</h3>
-                    <p class="text-gray-400 mb-4">
-                        Continuously optimize campaigns based on performance data and market trends in real-time.
-                    </p>
-                    <div class="flex flex-wrap">
-                        <span class="tech-badge">Reinforcement</span>
-                        <span class="tech-badge">Automation</span>
-                        <span class="tech-badge">APIs</span>
+                        <span class="tech-badge">Forecasting</span>
                     </div>
                 </div>
                 
@@ -589,7 +591,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-3">Enterprise Security</h3>
                     <p class="text-gray-400 mb-4">
-                        Bank-level encryption and privacy controls ensure your data remains secure and compliant.
+                        Bank-level encryption and privacy controls ensure your sensitive business data remains secure and compliant with industry regulations.
                     </p>
                     <div class="flex flex-wrap">
                         <span class="tech-badge">E2E Encryption</span>
@@ -604,7 +606,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-3">Seamless Integration</h3>
                     <p class="text-gray-400 mb-4">
-                        Connect with your existing marketing stack through our extensive API and integration ecosystem.
+                        Connect with your existing business systems through our extensive API and integration ecosystem. No disruption to your current operations.
                     </p>
                     <div class="flex flex-wrap">
                         <span class="tech-badge">REST API</span>
@@ -620,124 +622,172 @@
     <section id="tools" class="py-20 px-6 bg-gradient-to-b from-black to-gray-900">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Powerful AI Tools at Your Fingertips</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Business Superpowers at Your Fingertips</h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Everything you need to create, optimize, and scale your marketing efforts
+                    High-ticket AI automations that transform how you operate
                 </p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 tool-grid">
-                <!-- Ad Copy Generator -->
+                <!-- Business Knowledge Bot -->
                 <div class="card rounded-xl p-6">
                     <div class="tool-icon">
-                        <i class="fas fa-pen-fancy"></i>
+                        <i class="fas fa-robot"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Ad Copy Generator</h3>
+                    <h3 class="text-xl font-bold mb-3">Business Knowledge Bot</h3>
                     <p class="text-gray-400 mb-4">
-                        Create compelling ad copy for any platform with AI assistance. Generate multiple variations optimized for different audiences.
+                        AI assistant that understands your entire business context, from patient records to client histories. Provides instant, accurate responses.
                     </p>
-                    <button class="btn-primary w-full">Try Now</button>
+                    <button class="btn-primary w-full">Deploy Now</button>
                 </div>
                 
-                <!-- Visual Content Synthesizer -->
+                <!-- Sales Voice Coach -->
                 <div class="card rounded-xl p-6">
                     <div class="tool-icon">
-                        <i class="fas fa-image"></i>
+                        <i class="fas fa-microphone-alt"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Visual Content Synthesizer</h3>
+                    <h3 class="text-xl font-bold mb-3">Sales Voice Coach</h3>
                     <p class="text-gray-400 mb-4">
-                        Generate stunning images and videos from text descriptions. Create brand-consistent visuals in seconds.
+                        AI-powered voice synthesis that coaches your sales team in real-time. Perfect for high-ticket sales environments and client interactions.
                     </p>
-                    <button class="btn-primary w-full">Try Now</button>
+                    <button class="btn-primary w-full">Deploy Now</button>
                 </div>
                 
-                <!-- Script Wizard -->
+                <!-- Multi-Agent Workflow -->
                 <div class="card rounded-xl p-6">
                     <div class="tool-icon">
-                        <i class="fas fa-video"></i>
+                        <i class="fas fa-users-cog"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Script Wizard</h3>
+                    <h3 class="text-xl font-bold mb-3">Multi-Agent Workflow</h3>
                     <p class="text-gray-400 mb-4">
-                        Create engaging video scripts for any purpose. From product demos to viral TikToks, get professional scripts in minutes.
+                        Deploy sophisticated Crew AI systems that handle complex business processes from lead qualification to closing deals automatically.
                     </p>
-                    <button class="btn-primary w-full">Try Now</button>
+                    <button class="btn-primary w-full">Deploy Now</button>
                 </div>
                 
-                <!-- AI Campaign Architect -->
-                <div class="card rounded-xl p-6">
-                    <div class="tool-icon">
-                        <i class="fas fa-drafting-compass"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">AI Campaign Architect</h3>
-                    <p class="text-gray-400 mb-4">
-                        Design complete advertising campaigns from scratch. Get platform recommendations, budgets, and timelines.
-                    </p>
-                    <button class="btn-primary w-full">Try Now</button>
-                </div>
-                
-                <!-- Competitor Intelligence -->
+                <!-- Client Intelligence -->
                 <div class="card rounded-xl p-6">
                     <div class="tool-icon">
                         <i class="fas fa-user-secret"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Competitor Intelligence</h3>
+                    <h3 class="text-xl font-bold mb-3">Client Intelligence</h3>
                     <p class="text-gray-400 mb-4">
-                        Analyze competitor strategies and discover opportunities. Get actionable insights to outperform your competition.
+                        Analyze client behavior and preferences to predict needs and opportunities. Perfect for high-value client relationship management.
                     </p>
-                    <button class="btn-primary w-full">Try Now</button>
+                    <button class="btn-primary w-full">Deploy Now</button>
                 </div>
                 
-                <!-- Performance Predictor -->
+                <!-- Document Automation -->
                 <div class="card rounded-xl p-6">
                     <div class="tool-icon">
-                        <i class="fas fa-crystal-ball"></i>
+                        <i class="fas fa-file-contract"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Performance Predictor</h3>
+                    <h3 class="text-xl font-bold mb-3">Document Automation</h3>
                     <p class="text-gray-400 mb-4">
-                        Forecast campaign performance before you spend. Get accurate predictions and optimization recommendations.
+                        Generate, analyze, and manage complex documents automatically. From contracts to reports, handle it all with AI precision.
                     </p>
-                    <button class="btn-primary w-full">Try Now</button>
+                    <button class="btn-primary w-full">Deploy Now</button>
                 </div>
                 
-                <!-- Content Repurposing Engine -->
+                <!-- Predictive Forecasting -->
                 <div class="card rounded-xl p-6">
                     <div class="tool-icon">
-                        <i class="fas fa-recycle"></i>
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Content Repurposing</h3>
+                    <h3 class="text-xl font-bold mb-3">Predictive Forecasting</h3>
                     <p class="text-gray-400 mb-4">
-                        Transform existing content for different platforms. Turn a blog post into social media posts, videos, and more.
+                        Forecast business outcomes with unprecedented accuracy. Identify opportunities and risks before they materialize.
                     </p>
-                    <button class="btn-primary w-full">Try Now</button>
+                    <button class="btn-primary w-full">Deploy Now</button>
                 </div>
                 
-                <!-- AI Photo Editor -->
+                <!-- Financial Analysis Engine -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Financial Analysis Engine</h3>
+                    <p class="text-gray-400 mb-4">
+                        Advanced AI that analyzes financial data, identifies trends, and provides actionable insights for investment decisions and risk management.
+                    </p>
+                    <button class="btn-primary w-full">Deploy Now</button>
+                </div>
+                
+                <!-- Compliance Guardian -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Compliance Guardian</h3>
+                    <p class="text-gray-400 mb-4">
+                        Automated compliance monitoring that ensures your business adheres to industry regulations. From HIPAA to GDPR, stay compliant effortlessly.
+                    </p>
+                    <button class="btn-primary w-full">Deploy Now</button>
+                </div>
+                
+                <!-- Market Intelligence Analyst -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Market Intelligence Analyst</h3>
+                    <p class="text-gray-400 mb-4">
+                        AI that scans market trends, competitor activities, and consumer behavior to provide strategic insights for business growth.
+                    </p>
+                    <button class="btn-primary w-full">Deploy Now</button>
+                </div>
+                
+                <!-- Personalized Content Creator -->
                 <div class="card rounded-xl p-6">
                     <div class="tool-icon">
                         <i class="fas fa-magic"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">AI Photo Editor</h3>
+                    <h3 class="text-xl font-bold mb-3">Personalized Content Creator</h3>
                     <p class="text-gray-400 mb-4">
-                        Edit and enhance photos with AI. Remove backgrounds, adjust colors, and add effects with simple text commands.
+                        Generate hyper-personalized marketing content at scale. AI creates unique messages tailored to each client's preferences and behaviors.
                     </p>
-                    <button class="btn-primary w-full">Try Now</button>
+                    <button class="btn-primary w-full">Deploy Now</button>
                 </div>
                 
-                <!-- Voiceover Generator -->
+                <!-- Strategic Decision Assistant -->
                 <div class="card rounded-xl p-6">
                     <div class="tool-icon">
-                        <i class="fas fa-microphone"></i>
+                        <i class="fas fa-chess"></i>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Voiceover Generator</h3>
+                    <h3 class="text-xl font-bold mb-3">Strategic Decision Assistant</h3>
                     <p class="text-gray-400 mb-4">
-                        Create natural-sounding voiceovers in multiple languages and accents. Perfect for videos, podcasts, and ads.
+                        AI-powered advisor that analyzes complex business scenarios and provides strategic recommendations for critical decision-making.
                     </p>
-                    <button class="btn-primary w-full">Try Now</button>
+                    <button class="btn-primary w-full">Deploy Now</button>
+                </div>
+                
+                <!-- Automated Research Analyst -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Automated Research Analyst</h3>
+                    <p class="text-gray-400 mb-4">
+                        AI that conducts comprehensive research on any topic, synthesizes information, and provides detailed reports with actionable insights.
+                    </p>
+                    <button class="btn-primary w-full">Deploy Now</button>
+                </div>
+                
+                <!-- Talent Acquisition Specialist -->
+                <div class="card rounded-xl p-6">
+                    <div class="tool-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Talent Acquisition Specialist</h3>
+                    <p class="text-gray-400 mb-4">
+                        AI that streamlines the recruitment process by identifying top candidates, conducting initial screenings, and predicting cultural fit.
+                    </p>
+                    <button class="btn-primary w-full">Deploy Now</button>
                 </div>
             </div>
             
             <div class="text-center mt-12">
-                <button class="btn-secondary">View All 50+ Tools</button>
+                <button class="btn-secondary">View All 50+ Automations</button>
             </div>
         </div>
     </section>
@@ -746,9 +796,9 @@
     <section class="py-20 px-6">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Your Vision, Our Execution</h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Get started in minutes and see results in days
+                    Transform your business with AI in three simple steps
                 </p>
             </div>
             
@@ -759,7 +809,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-3">Choose Your Operator</h3>
                     <p class="text-gray-400">
-                        Select the Operator package that fits your business needs and budget.
+                        Select the Operator package that fits your business needs and vision.
                     </p>
                 </div>
                 
@@ -769,7 +819,7 @@
                     </div>
                     <h3 class="text-xl font-bold mb-3">Deploy AI Automations</h3>
                     <p class="text-gray-400">
-                        Access our marketplace of AI tools and deploy them on your Operator device.
+                        Access our marketplace of sophisticated AI tools and deploy them on your Operator system.
                     </p>
                 </div>
                 
@@ -777,9 +827,9 @@
                     <div class="w-16 h-16 rounded-full brand-bg flex items-center justify-center mx-auto mb-6">
                         <span class="text-2xl font-bold">3</span>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Scale Your Business</h3>
+                    <h3 class="text-xl font-bold mb-3">Transform Your Business</h3>
                     <p class="text-gray-400">
-                        Use AI to automate tasks, generate content, and optimize your marketing efforts.
+                        Watch as AI automations give your business capabilities you never thought possible.
                     </p>
                 </div>
             </div>
@@ -790,9 +840,9 @@
     <section id="operator" class="py-20 px-6 bg-gradient-to-b from-black to-gray-900">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Introducing Operator HQ AI</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Operator HQ AI</h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    Your own private AI powerhouse that puts cutting-edge technology directly in your hands
+                    Your private AI powerhouse that brings your vision to life
                 </p>
             </div>
             
@@ -938,9 +988,9 @@
     <section id="testimonials" class="py-20 px-6">
         <div class="container mx-auto max-w-6xl">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Loved by Businesses Worldwide</h2>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Transforming High-Ticket Businesses</h2>
                 <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                    See what our customers have to say about our AI tools
+                    Hear from leaders who have revolutionized their operations
                 </p>
             </div>
             
@@ -950,11 +1000,11 @@
                         <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
                         <div>
                             <h4 class="font-bold">Sarah Johnson</h4>
-                            <p class="text-sm text-gray-400">Marketing Director, TechCorp</p>
+                            <p class="text-sm text-gray-400">Healthcare Director, MedCorp</p>
                         </div>
                     </div>
                     <p class="text-gray-300">
-                        "The Operator Package completely transformed our marketing strategy. We saw a 300% ROI within the first month. It's like having a team of experts working 24/7."
+                        "The Business Knowledge Bot transformed our patient management. It understands complex medical histories and provides accurate information instantly. This has saved us countless hours and improved patient care significantly."
                     </p>
                 </div>
                 
@@ -963,11 +1013,11 @@
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
                         <div>
                             <h4 class="font-bold">Michael Chen</h4>
-                            <p class="text-sm text-gray-400">CEO, StartupX</p>
+                            <p class="text-sm text-gray-400">CEO, Wealth Management</p>
                         </div>
                     </div>
                     <p class="text-gray-300">
-                        "As a startup, we couldn't afford a big marketing team. The Foundation Package leveled the playing field. We're now competing with industry leaders and winning."
+                        "Our Crew AI workflow for lead qualification has increased our conversion rate by 300%. The system handles complex financial scenarios and provides insights we never had before. Worth every penny of the investment."
                     </p>
                 </div>
                 
@@ -976,11 +1026,11 @@
                         <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="User" class="w-12 h-12 rounded-full mr-4">
                         <div>
                             <h4 class="font-bold">Emily Rodriguez</h4>
-                            <p class="text-sm text-gray-400">Content Creator, StyleHub</p>
+                            <p class="text-sm text-gray-400">Legal Partner, Prestige Law</p>
                         </div>
                     </div>
                     <p class="text-gray-300">
-                        "The Visual Content Synthesizer is a game-changer. I can now create professional-looking visuals for my social media in minutes instead of hours. It's incredible!"
+                        "The Document Automation system has revolutionized how we handle contracts and legal documents. What used to take days now takes minutes, with higher accuracy and consistency. It's given our firm a true competitive advantage."
                     </p>
                 </div>
             </div>
@@ -990,9 +1040,9 @@
     <!-- CTA Section -->
     <section class="py-20 px-6 bg-gradient-to-r from-gray-900 to-black">
         <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Revolutionize Your Business?</h2>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Unlock Your Business Superpowers?</h2>
             <p class="text-xl text-gray-300 mb-8">
-                Join thousands of businesses using Operator HQ AI to transform their operations
+                Join visionary businesses using Operator HQ AI to transform their operations
             </p>
             <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
                 <button class="btn-primary pulse">Schedule a Consultation</button>
@@ -1016,7 +1066,7 @@
                         </div>
                     </div>
                     <p class="text-gray-400 text-sm">
-                        Revolutionary AI tools and Operator systems for modern businesses.
+                        Revolutionary AI tools and Operator systems for visionary businesses.
                     </p>
                 </div>
                 
@@ -1026,7 +1076,7 @@
                         <li><a href="#" class="hover:text-brand-color transition">Operator HQ AI</a></li>
                         <li><a href="#" class="hover:text-brand-color transition">Foundation Package</a></li>
                         <li><a href="#" class="hover:text-brand-color transition">Operator Package</a></li>
-                        <li><a href="#" class="hover:text-brand-color transition">AI Tools</a></li>
+                        <li><a href="#" class="hover:text-brand-color transition">AI Automations</a></li>
                     </ul>
                 </div>
                 
